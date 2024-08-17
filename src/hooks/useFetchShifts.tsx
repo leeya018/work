@@ -10,9 +10,10 @@ export default function useFetchShifts(
   month: number
 ) {
   const [shifts, setShifts] = useState<Shift[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
+    setIsLoading(true);
     if (userStore.user && title) {
       getShiftsApi(userStore.user.uid, title, year, month)
         .then((shiftsItems) => {
@@ -25,6 +26,8 @@ export default function useFetchShifts(
         })
         .catch((err: any) => {
           console.log(err);
+          setIsLoading(false);
+
           messageStore.setMessage({ type: "error", text: err.message });
         });
     }

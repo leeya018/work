@@ -31,6 +31,11 @@ export default function Shifts({ year, month }: ShiftsProps) {
           security
         </button>
       </div>
+      {isLoading && chosen && (
+        <div className="mt-5 text-xl font-bold text-black flex justify-center">
+          Loading ...
+        </div>
+      )}
       <ul className="mt-5 flex flex-col gap-3">
         {shifts.map((shift, key) => (
           <li key={key} className="w-full px-4">

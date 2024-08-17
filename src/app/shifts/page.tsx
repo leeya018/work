@@ -10,7 +10,7 @@ import React, { useState } from "react";
 
 const ShiftsPage = () => {
   const auth = getAuth();
-  const [chosen, setChosen] = useState<string>("shifts");
+  const [chosen, setChosen] = useState<string>("shifts_per_m");
   const today = new Date();
   const curr_m = today.getMonth() + 1;
   const curr_y = today.getFullYear();
@@ -57,7 +57,7 @@ const ShiftsPage = () => {
       </div>
       {chosen === "add_shift" && <AddShift />}
       {chosen === "shifts" && <Shifts month={curr_m} year={curr_y} />}
-      {/* {chosen === "shifts_per_m" && <ShiftsPerMonth />} */}
+      {chosen === "shifts_per_m" && <ShiftsPerMonth />}
       {/* <ShiftSum />  */}
       <Alert />
       {/* <TotalSumShifts />  */}
