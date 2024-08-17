@@ -10,7 +10,7 @@ export default function HomePage() {
       <h1 className="w-full flex justify-center  text-3xl font-bold">Menu</h1>
       <ul className="flex flex-col gap-5 ml-3 mt-10 text-xl ">
         <li className="underline text-blue-500">
-          <Link href="/shifts">Shifts</Link>
+          <Link href="/security">Secrurity</Link>
         </li>
         <li className="underline text-blue-500">
           <Link href="/cash">Cash</Link>
@@ -19,3 +19,10 @@ export default function HomePage() {
     </div>
   );
 }
+
+// cash
+// shifts
+// count
+
+//  security
+// shifts

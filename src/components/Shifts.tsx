@@ -4,36 +4,23 @@ import React, { useState } from "react";
 import ShiftCard from "./Shift";
 
 type ShiftsProps = {
+  title: string;
   year: number;
   month: number;
 };
-export default function Shifts({ year, month }: ShiftsProps) {
-  const [chosen, setChosen] = useState<string>("");
-  const { isLoading, shifts } = useFetchShifts(chosen, year, month);
+export default function Shifts({ title, year, month }: ShiftsProps) {
+  const { isLoading, shifts } = useFetchShifts(title, year, month);
   console.log(shifts);
   return (
     <div>
-      <div className="flex items-center justify-center gap-10 mt-5">
-        <button
-          className={`${
-            chosen === TITLES.cash && "bg-black text-white"
-          } text-black px-3 py-2`}
-          onClick={() => setChosen(TITLES.cash)}
-        >
-          cash
-        </button>
-        <button
-          className={`${
-            chosen === TITLES.security && "bg-black text-white"
-          } text-black px-3 py-2`}
-          onClick={() => setChosen(TITLES.security)}
-        >
-          security
-        </button>
-      </div>
-      {isLoading && chosen && (
+      {isLoading && title && (
         <div className="mt-5 text-xl font-bold text-black flex justify-center">
           Loading ...
+        </div>
+      )}
+      {!isLoading && shifts.length === 0 && (
+        <div className="mt-5 text-md  text-black flex justify-center">
+          -- No shifts --
         </div>
       )}
       <ul className="mt-5 flex flex-col gap-3">

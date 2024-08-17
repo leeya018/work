@@ -8,12 +8,17 @@ import { getAuth, signOut } from "firebase/auth";
 import { observer } from "mobx-react-lite";
 import React, { useState } from "react";
 
-const ShiftsPage = () => {
+const today = new Date();
+const curr_m = today.getMonth() + 1;
+const curr_y = today.getFullYear();
+
+type ShiftsInfoProps = {
+  title: string;
+};
+const ShiftsInfo = ({ title }: ShiftsInfoProps) => {
   const auth = getAuth();
   const [chosen, setChosen] = useState<string>("shifts_per_m");
-  const today = new Date();
-  const curr_m = today.getMonth() + 1;
-  const curr_y = today.getFullYear();
+
   const logoutUser = async () => {
     try {
       await signOut(auth);
@@ -24,7 +29,7 @@ const ShiftsPage = () => {
   };
 
   return (
-    <ProtectedRoute>
+    <div>
       <h1 className="flex justify-center mt-10 text-3xl ">my shifts</h1>
       {/* <button onClick={logoutUser} className="btn">
         logout
@@ -55,18 +60,20 @@ const ShiftsPage = () => {
           shifts per month
         </button>
       </div>
-      {chosen === "add_shift" && <AddShift />}
-      {chosen === "shifts" && <Shifts month={curr_m} year={curr_y} />}
-      {chosen === "shifts_per_m" && <ShiftsPerMonth />}
+      {chosen === "add_shift" && <AddShift title={title} />}
+      {chosen === "shifts" && (
+        <Shifts title={title} month={curr_m} year={curr_y} />
+      )}
+      {chosen === "shifts_per_m" && <ShiftsPerMonth title={title} />}
       {/* <ShiftSum />  */}
       <Alert />
       {/* <TotalSumShifts />  */}
       {/* totalShift */}
-    </ProtectedRoute>
+    </div>
   );
 };
 
-export default observer(ShiftsPage);
+export default observer(ShiftsInfo);
 
 // thisn i need
 //  db - add shift , get shifts , updateShift ( with the end time. )

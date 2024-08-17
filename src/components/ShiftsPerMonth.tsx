@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import Shifts from "./Shifts";
 import { MONTHS, YEARS } from "@/util";
+import { title } from "process";
 
 const today = new Date();
 const curr_m = today.getMonth() + 1;
 const curr_y = today.getFullYear();
 
-export default function ShiftsPerMonth() {
+type ShiftsPerMonthProps = {
+  title: string;
+};
+export default function ShiftsPerMonth({ title }: ShiftsPerMonthProps) {
   const [chosenMonth, setChosenMonth] = useState(curr_m);
   const [chosenYear, setChosenYear] = useState(curr_y);
 
@@ -48,7 +52,7 @@ export default function ShiftsPerMonth() {
       </div>
 
       <div>
-        <Shifts month={chosenMonth} year={chosenYear} />
+        <Shifts title={title} month={chosenMonth} year={chosenYear} />
       </div>
     </div>
   );
