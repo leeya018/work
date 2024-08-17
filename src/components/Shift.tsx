@@ -9,7 +9,7 @@ export default function ShiftCard({ shift }: ShiftPorps) {
   console.log(shift);
   console.log(shift);
   return (
-    <div className="p-2 border-2 rounded-md shadow-md">
+    <div className=" shadow-md bg-yellow p-3 rounded-xl text-lg font-medium">
       <div>start: {convertTime(shift.startedAt)}</div>
       {shift?.finishedAt && <div>end: {convertTime(shift?.finishedAt)}</div>}
       {shift?.finishedAt && (

@@ -34,27 +34,27 @@ const ShiftsInfo = ({ title }: ShiftsInfoProps) => {
       {/* <button onClick={logoutUser} className="btn">
         logout
       </button> */}
-      <div className="flex items-center justify-center gap-10 mt-5">
+      <div className="flex items-center justify-center gap-10 mt-5 text-md font-semibold text-white">
         <button
           className={`${
-            chosen === "add_shift" && "bg-black text-white"
-          } text-black px-3 py-2`}
+            chosen === "add_shift" && "bg-yellow p-5 rounded-xl text-black"
+          }  px-3 py-2`}
           onClick={() => setChosen("add_shift")}
         >
           add shift
         </button>
         <button
           className={`${
-            chosen === "shifts" && "bg-black text-white"
-          } text-black px-3 py-2`}
+            chosen === "shifts" && "bg-yellow p-5 rounded-xl text-black"
+          }  px-3 py-2`}
           onClick={() => setChosen("shifts")}
         >
           my shifts
         </button>
         <button
           className={`${
-            chosen === "shifts_per_m" && "bg-black text-white"
-          } text-black px-3 py-2`}
+            chosen === "shifts_per_m" && "bg-yellow p-5 rounded-xl text-black"
+          }  px-3 py-2`}
           onClick={() => setChosen("shifts_per_m")}
         >
           shifts per month

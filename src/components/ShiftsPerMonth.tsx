@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Shifts from "./Shifts";
 import { MONTHS, YEARS } from "@/util";
 import { title } from "process";
+import Select from "@/ui/Select";
 
 const today = new Date();
 const curr_m = today.getMonth() + 1;
@@ -25,30 +26,20 @@ export default function ShiftsPerMonth({ title }: ShiftsPerMonthProps) {
     <div>
       {/* slects */}
       <div className="flex justify-center gap-4 mt-5">
-        <select
+        <Select
+          options={MONTHS}
+          onChange={handleChangeM}
           name="month"
           id="month"
           value={chosenMonth}
-          onChange={handleChangeM}
-        >
-          {MONTHS.map((m_option) => (
-            <option key={m_option.value} value={m_option.value}>
-              {m_option.label}
-            </option>
-          ))}
-        </select>
-        <select
+        />
+        <Select
           name="year"
           id="year"
           value={chosenYear}
           onChange={handleChangeY}
-        >
-          {YEARS.map((y_option) => (
-            <option key={y_option.value} value={y_option.value}>
-              {y_option.label}
-            </option>
-          ))}
-        </select>
+          options={YEARS}
+        />
       </div>
 
       <div>
