@@ -64,7 +64,7 @@ export default function Shifts({ title, year, month }: ShiftsProps) {
               </button>
             </div>
           ) : (
-            <div className="flex flex-col mt-5 items-center text-xl font-semibold">
+            <div className="flex flex-col mt-5 items-center text-xl font-semibold text-white">
               <div>hours: {totalHours.toFixed(2)} Hours</div>
               <div>wage: {totalWage.toFixed(2)} Nis</div>
             </div>

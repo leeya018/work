@@ -38,7 +38,7 @@ const ShiftsInfo = ({ title }: ShiftsInfoProps) => {
         <button
           className={`${
             chosen === "add_shift" && "bg-yellow p-5 rounded-xl text-black"
-          }  px-3 py-2`}
+          }  px-3 py-2 bg-gray-900 rounded-xl`}
           onClick={() => setChosen("add_shift")}
         >
           add shift
@@ -46,7 +46,7 @@ const ShiftsInfo = ({ title }: ShiftsInfoProps) => {
         <button
           className={`${
             chosen === "shifts" && "bg-yellow p-5 rounded-xl text-black"
-          }  px-3 py-2`}
+          }  px-3 py-2 bg-gray-900 rounded-xl`}
           onClick={() => setChosen("shifts")}
         >
           my shifts
@@ -54,7 +54,7 @@ const ShiftsInfo = ({ title }: ShiftsInfoProps) => {
         <button
           className={`${
             chosen === "shifts_per_m" && "bg-yellow p-5 rounded-xl text-black"
-          }  px-3 py-2`}
+          }  px-3 py-2 bg-gray-900 rounded-xl`}
           onClick={() => setChosen("shifts_per_m")}
         >
           shifts per month

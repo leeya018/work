@@ -12,28 +12,23 @@ export default function CashPage() {
   const router = useRouter();
   return (
     <ProtectedRoute>
-      <div className="container h-screen p-10 bg-black">
+      <div className="container min-h-screen p-10 bg-black">
         <Header />
         <h1 className="flex justify-center mt-10 text-4xl ">cash page</h1>
-        <button
-          className="btn absolute top-0 left-0"
-          onClick={() => router.back()}
-        >
-          back
-        </button>
-        <div className="flex items-center justify-center gap-10 mt-5 text-xl font-semibold">
+
+        <div className="flex items-center justify-center gap-10 mt-5 text-xl font-semibold text-white">
           <button
             className={`${
-              chosen === "shifts" && "bg-yellow p-5 rounded-xl"
-            } text-black px-3 py-2`}
+              chosen === "shifts" && "bg-yellow p-5 rounded-xl text-black"
+            }  px-3 py-2 bg-gray-900 rounded-xl`}
             onClick={() => setChosen("shifts")}
           >
             shifts
           </button>
           <button
             className={`${
-              chosen === "cash_count" && "bg-yellow p-5 rounded-xl"
-            } text-white px-3 py-2`}
+              chosen === "cash_count" && "bg-yellow p-5 rounded-xl text-black"
+            }  px-3 py-2 bg-gray-900 rounded-xl`}
             onClick={() => setChosen("cash_count")}
           >
             cash count
