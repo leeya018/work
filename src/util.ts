@@ -6,8 +6,7 @@ export const TITLES = {
   cash: "cash",
   security: "security",
 };
-
-export const timeDifference = (
+export const timeDifferenceDuration = (
   startDate: Timestamp,
   endDate: Date | Timestamp
 ) => {
@@ -26,6 +25,16 @@ export const timeDifference = (
   const duration = moment.duration(end.diff(start));
 
   // Extract hours and minutes
+
+  return duration;
+};
+export const timeDifference = (
+  startDate: Timestamp,
+  endDate: Date | Timestamp
+) => {
+  // Parse the dates using moment
+  const duration = timeDifferenceDuration(startDate, endDate);
+  console.log(duration.asHours());
   const hours = Math.floor(duration.asHours());
   const minutes = duration.minutes();
 
