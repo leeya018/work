@@ -1,22 +1,26 @@
 import { db } from "@/firebase";
-import { CodeItem } from "@/interfaces/CodeItem";
+import { Shift } from "@/interfaces/Shift";
 
 import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
 import { findUserApi } from "../user/findUser";
 
-export const getCodeItemsApi = async (userId: string): Promise<CodeItem[]> => {
+export const getShiftsApi = async (
+  userId: string,
+  title: string
+): Promise<Shift[]> => {
   if (!userId) throw new Error("id of user not defiend");
   await findUserApi(userId);
 
   const q = query(
-    collection(db, "codeItems"),
+    collection(db, "shifts"),
     where("userId", "==", userId),
+    where("title", "==", title),
     orderBy("createdAt")
   );
   const querySnapshot = await getDocs(q);
-  const codeItems = querySnapshot.docs.map((doc) => ({
+  const shifts = querySnapshot.docs.map((doc) => ({
     id: doc.id,
     ...doc.data(),
-  })) as CodeItem[];
-  return codeItems;
+  })) as Shift[];
+  return shifts;
 };

@@ -1,10 +1,9 @@
 import { Timestamp } from "firebase/firestore";
 
-export type CodeItem = {
+export type Shift = {
   id?: string;
   title: string;
-  description: string;
-  code: string;
-  userId: string;
+  startedAt: Timestamp;
+  finishedAt?: Timestamp;
   createdAt?: Timestamp;
 };
