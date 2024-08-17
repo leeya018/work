@@ -8,6 +8,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      colors: {
+        yellow: "#E1FF41",
+      },
       backgroundImage: {
         login: "url('/images/login/bg.png')",
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
