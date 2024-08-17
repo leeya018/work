@@ -10,7 +10,6 @@ const firebaseConfigDev = {
   storageBucket: process.env.NEXT_PUBLIC_STORAGE_BUCKET,
   messagingSenderId: process.env.NEXT_PUBLIC_MESSAGING_SENDER_ID,
   appId: process.env.NEXT_PUBLIC_APP_ID,
-  // measurementId: process.env.NEXT_PUBLIC_MEASUREMENT_ID,
 };
 const firebaseConfigProd = {
   apiKey: process.env.NEXT_PUBLIC_API_KEY_PROD,
@@ -19,7 +18,6 @@ const firebaseConfigProd = {
   storageBucket: process.env.NEXT_PUBLIC_STORAGE_BUCKET_PROD,
   messagingSenderId: process.env.NEXT_PUBLIC_MESSAGING_SENDER_ID_PROD,
   appId: process.env.NEXT_PUBLIC_APP_ID_PROD,
-  // measurementId: process.env.NEXT_PUBLIC_MEASUREMENT_ID_PROD,
 };
 
 const firebaseConfig =

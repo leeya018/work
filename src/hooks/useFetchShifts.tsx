@@ -4,13 +4,17 @@ import { messageStore } from "@/stores/messageStore";
 import userStore from "@/stores/userStore";
 import { useEffect, useState } from "react";
 
-export default function useFetchShifts(title: string) {
+export default function useFetchShifts(
+  title: string,
+  year: number,
+  month: number
+) {
   const [shifts, setShifts] = useState<Shift[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     if (userStore.user && title) {
-      getShiftsApi(userStore.user.uid, title)
+      getShiftsApi(userStore.user.uid, title, year, month)
         .then((shiftsItems) => {
           setShifts(shiftsItems);
           messageStore.setMessage({
@@ -24,7 +28,7 @@ export default function useFetchShifts(title: string) {
           messageStore.setMessage({ type: "error", text: err.message });
         });
     }
-  }, [userStore.user, title]);
+  }, [userStore.user, title, year, month]);
 
   return { shifts, isLoading };
 }

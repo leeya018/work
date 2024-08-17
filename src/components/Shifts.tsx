@@ -3,9 +3,13 @@ import { TITLES } from "@/util";
 import React, { useState } from "react";
 import ShiftCard from "./Shift";
 
-export default function Shifts() {
+type ShiftsProps = {
+  year: number;
+  month: number;
+};
+export default function Shifts({ year, month }: ShiftsProps) {
   const [chosen, setChosen] = useState<string>("");
-  const { isLoading, shifts } = useFetchShifts(chosen);
+  const { isLoading, shifts } = useFetchShifts(chosen, year, month);
   console.log(shifts);
   return (
     <div>

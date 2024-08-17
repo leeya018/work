@@ -4,6 +4,7 @@ import { Shift } from "@/interfaces/Shift";
 import {
   collection,
   getDocs,
+  limit,
   orderBy,
   query,
   Timestamp,
@@ -11,7 +12,7 @@ import {
 } from "firebase/firestore";
 import { findUserApi } from "../user/findUser";
 
-export const getShiftsApi = async (
+export const getSalaryPerMonth = async (
   userId: string,
   title: string,
   year: number,
@@ -33,8 +34,7 @@ export const getShiftsApi = async (
     where("userId", "==", userId),
     where("title", "==", title),
     where("createdAt", ">=", startTimestamp),
-    where("createdAt", "<=", endTimestamp),
-    orderBy("createdAt", "desc")
+    where("createdAt", "<=", endTimestamp)
   );
   const querySnapshot = await getDocs(q);
   const shifts = querySnapshot.docs.map((doc) => ({
