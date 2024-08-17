@@ -7,10 +7,10 @@ interface Bill {
 }
 
 const bills: Bill[] = [
-  { name: "20 Shekels", value: 20, image: "/images/20shekels.png" },
-  { name: "50 Shekels", value: 50, image: "/images/50shekels.png" },
-  { name: "100 Shekels", value: 100, image: "/images/100shekels.png" },
-  { name: "200 Shekels", value: 200, image: "/images/200shekels.png" },
+  { name: "20 Shekels", value: 20, image: "/images/cash/20shekels.png" },
+  { name: "50 Shekels", value: 50, image: "/images/cash/50shekels.png" },
+  { name: "100 Shekels", value: 100, image: "/images/cash/100shekels.png" },
+  { name: "200 Shekels", value: 200, image: "/images/cash/200shekels.png" },
 ];
 const BillsCalculator: React.FC = () => {
   const [amounts, setAmounts] = useState<number[]>(Array(bills.length).fill(0));

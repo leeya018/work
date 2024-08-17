@@ -8,12 +8,37 @@ interface Coin {
 }
 
 const coins: Coin[] = [
-  { name: "10 Agorot", weight: 4, value: 0.1, image: "/images/10agorot.png" },
-  { name: "50 Agorot", weight: 6.5, value: 0.5, image: "/images/50agorot.png" },
-  { name: "1 Shekel", weight: 8, value: 1, image: "/images/1shekel.png" },
-  { name: "2 Shekels", weight: 5.7, value: 2, image: "/images/2shekels.png" },
-  { name: "5 Shekels", weight: 8.2, value: 5, image: "/images/5shekels.png" },
-  { name: "10 Shekels", weight: 7, value: 10, image: "/images/10shekels.png" },
+  {
+    name: "10 Agorot",
+    weight: 4,
+    value: 0.1,
+    image: "/images/cash/10agorot.png",
+  },
+  {
+    name: "50 Agorot",
+    weight: 6.5,
+    value: 0.5,
+    image: "/images/cash/50agorot.png",
+  },
+  { name: "1 Shekel", weight: 8, value: 1, image: "/images/cash/1shekel.png" },
+  {
+    name: "2 Shekels",
+    weight: 5.7,
+    value: 2,
+    image: "/images/cash/2shekels.png",
+  },
+  {
+    name: "5 Shekels",
+    weight: 8.2,
+    value: 5,
+    image: "/images/cash/5shekels.png",
+  },
+  {
+    name: "10 Shekels",
+    weight: 7,
+    value: 10,
+    image: "/images/cash/10shekels.png",
+  },
 ];
 
 const CoinCalculator: React.FC = () => {
