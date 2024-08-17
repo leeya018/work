@@ -7,11 +7,20 @@ export const TITLES = {
   security: "security",
 };
 
-export const timeDifference = (startDate: Timestamp, endDate: Date) => {
+export const timeDifference = (
+  startDate: Timestamp,
+  endDate: Date | Timestamp
+) => {
   // Parse the dates using moment
   const format = "YYYY-MM-DD HH:mm:ss";
   const start = moment(startDate.toDate(), format);
-  const end = moment(endDate, format);
+  let end = moment(endDate, format);
+
+  if (endDate instanceof Date) {
+    end = moment(endDate, format);
+  } else {
+    end = moment(endDate.toDate(), format);
+  }
 
   // Calculate the difference in milliseconds
   const duration = moment.duration(end.diff(start));
@@ -25,4 +34,11 @@ export const timeDifference = (startDate: Timestamp, endDate: Date) => {
     2,
     "0"
   )}`;
+};
+
+export const convertTime = (timestamp: Timestamp) => {
+  const date = timestamp.toDate();
+
+  // Convert Date to moment object and format as YYYY-MM-DD
+  return moment(date).format("YYYY-MM-DD HH:mm:ss");
 };

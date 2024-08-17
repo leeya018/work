@@ -9,7 +9,7 @@ export default function useFetchShifts(title: string) {
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    if (userStore.user) {
+    if (userStore.user && title) {
       getShiftsApi(userStore.user.uid, title)
         .then((shiftsItems) => {
           setShifts(shiftsItems);

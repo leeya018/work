@@ -5,10 +5,11 @@ import ProtectedRoute from "@/components/protectedRoute";
 import Shifts from "@/components/Shifts";
 import { getAuth, signOut } from "firebase/auth";
 import { observer } from "mobx-react-lite";
-import React from "react";
+import React, { useState } from "react";
 
 const ShiftsPage = () => {
   const auth = getAuth();
+  const [chosen, setChosen] = useState<string>("shifts");
 
   const logoutUser = async () => {
     try {
@@ -25,8 +26,26 @@ const ShiftsPage = () => {
       {/* <button onClick={logoutUser} className="btn">
         logout
       </button> */}
-      <AddShift />
-      <Shifts />
+      <div className="flex items-center justify-center gap-10 mt-5">
+        <button
+          className={`${
+            chosen === "add_shift" && "bg-black text-white"
+          } text-black px-3 py-2`}
+          onClick={() => setChosen("add_shift")}
+        >
+          add shift
+        </button>
+        <button
+          className={`${
+            chosen === "shifts" && "bg-black text-white"
+          } text-black px-3 py-2`}
+          onClick={() => setChosen("shifts")}
+        >
+          my shifts
+        </button>
+      </div>
+      {chosen === "add_shift" && <AddShift />}
+      {chosen === "shifts" && <Shifts />}
       <Alert />
       {/* <TotalSumShifts />  */}
       {/* totalShift */}
