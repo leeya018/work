@@ -7,8 +7,8 @@ export default function HomePage() {
 
   return (
     <div className="container h-screen p-10">
-      <h1 className="w-full flex justify-center  text-xl font-bold">Menu</h1>
-      <ul className="flex flex-col gap-5 ml-3 mt-5 ">
+      <h1 className="w-full flex justify-center  text-3xl font-bold">Menu</h1>
+      <ul className="flex flex-col gap-5 ml-3 mt-10 text-xl ">
         <li className="underline text-blue-500">
           <Link href="/shifts">Shifts</Link>
         </li>
