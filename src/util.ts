@@ -68,3 +68,14 @@ export const MONTHS = [
 ];
 
 export const YEARS = [{ value: 2024, label: "2024" }];
+
+export const vegCodes = [
+  { title: "tomato", code: "60", correctNum: 0, inputValue: "" },
+  { title: "cucumber", code: "61", correctNum: 0, inputValue: "" },
+  { title: "carrot", code: "62", correctNum: 0, inputValue: "" },
+  { title: "white onion", code: "56", correctNum: 0, inputValue: "" },
+  { title: "red onion", code: "57", correctNum: 0, inputValue: "" },
+  { title: "banana", code: "100", correctNum: 0, inputValue: "" },
+  { title: "mango", code: "98", correctNum: 0, inputValue: "" },
+  { title: "gamba", code: "52", correctNum: 0, inputValue: "" },
+];

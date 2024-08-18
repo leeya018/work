@@ -1,5 +1,6 @@
 "use client";
 import BillsCalculator from "@/components/BillsCalculator";
+import Codes from "@/components/Codes";
 import CoinCalculator from "@/components/CoinCalculator";
 import Header from "@/components/Header";
 import ProtectedRoute from "@/components/protectedRoute";
@@ -35,6 +36,14 @@ export default function CashPage() {
           >
             cash count
           </button>
+          <button
+            className={`${
+              chosen === "codes" && "bg-yellow p-5 rounded-xl text-black"
+            }  px-3 py-2 bg-gray-900 rounded-xl`}
+            onClick={() => setChosen("codes")}
+          >
+            codes
+          </button>
         </div>
         {chosen === "cash_count" && (
           <div>
@@ -44,6 +53,7 @@ export default function CashPage() {
         )}
 
         {chosen === "shifts" && <ShiftsInfo title={"cash"} />}
+        {chosen === "codes" && <Codes />}
       </div>
     </ProtectedRoute>
   );
