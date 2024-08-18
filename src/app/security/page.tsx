@@ -12,11 +12,12 @@ export default function SecurityPage() {
     <ProtectedRoute>
       <div className="container min-h-screen p-10 bg-black">
         <Header />
-        <h1 className="flex justify-center mt-10 text-3xl text-white">
+        <h1 className="flex justify-center mt-14 text-3xl text-white">
           security
         </h1>
-
-        <ShiftsInfo title={TITLES.security} />
+        <div className="mt-10">
+          <ShiftsInfo title={TITLES.security} />
+        </div>
       </div>
     </ProtectedRoute>
   );

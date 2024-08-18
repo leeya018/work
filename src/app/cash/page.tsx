@@ -14,11 +14,11 @@ export default function CashPage() {
     <ProtectedRoute>
       <div className="container min-h-screen p-10 bg-black">
         <Header />
-        <h1 className="flex justify-center mt-10 text-3xl text-white ">
+        <h1 className="flex justify-center mt-14 text-3xl text-white ">
           cash page
         </h1>
 
-        <div className="flex items-center justify-center gap-10 mt-5 text-xl font-semibold text-white">
+        <div className="flex items-center justify-center gap-10 mt-10 text-xl font-semibold text-white">
           <button
             className={`${
               chosen === "shifts" && "bg-yellow p-5 rounded-xl text-black"

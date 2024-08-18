@@ -19,21 +19,8 @@ const ShiftsInfo = ({ title }: ShiftsInfoProps) => {
   const auth = getAuth();
   const [chosen, setChosen] = useState<string>("shifts_per_m");
 
-  const logoutUser = async () => {
-    try {
-      await signOut(auth);
-    } catch (error) {
-      console.error("Error logging out: ", error);
-      throw error;
-    }
-  };
-
   return (
-    <div>
-      <h1 className="flex justify-center mt-10 text-3xl ">my shifts</h1>
-      {/* <button onClick={logoutUser} className="btn">
-        logout
-      </button> */}
+    <div className="text-white">
       <div className="flex items-center justify-center gap-10 mt-5 text-md font-semibold text-white">
         <button
           className={`${

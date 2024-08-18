@@ -39,23 +39,25 @@ export default function Shifts({ title, year, month }: ShiftsProps) {
   return (
     <div>
       {isLoading && title && (
-        <div className="mt-5 text-xl font-bold text-black flex justify-center">
+        <div className="mt-5 text-xl font-semibold text-white flex justify-center">
           Loading ...
         </div>
       )}
       {!isLoading && shifts.length === 0 && (
-        <div className="mt-5 text-md  text-black flex justify-center">
+        <div className="mt-5 text-md  text-white flex justify-center">
           -- No shifts --
         </div>
       )}
-      <ul className="mt-5 flex flex-col gap-3">
-        {shifts.map((shift, key) => (
-          <li key={key} className="w-full px-4">
-            <ShiftCard shift={shift} />
-          </li>
-        ))}
-      </ul>
-      {shifts.length > 0 && (
+      {!isLoading && shifts.length > 0 && (
+        <ul className="mt-5 flex flex-col gap-3">
+          {shifts.map((shift, key) => (
+            <li key={key} className="w-full px-4">
+              <ShiftCard shift={shift} />
+            </li>
+          ))}
+        </ul>
+      )}
+      {shifts.length > 0 && !isLoading && (
         <div>
           {totalHours == -1 || totalWage == -1 ? (
             <div className="flex justify-center mt-5">

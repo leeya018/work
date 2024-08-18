@@ -5,9 +5,11 @@ import ProtectedRoute from "@/components/protectedRoute";
 import Image from "next/image";
 import userStore from "@/stores/userStore";
 import Header from "@/components/Header";
+import { useRouter } from "next/navigation";
 
 export default function HomePage() {
   // const [billsAmounts, setAmounts] = useState<number[]>(Array(bills.length).fill(0));
+  const router = useRouter();
 
   return (
     <ProtectedRoute>
@@ -15,13 +17,19 @@ export default function HomePage() {
         {/* header */}
         <Header />
 
-        <h1 className="w-full flex mt-10  text-3xl font-semibold">Menu</h1>
+        <h1 className="flex justify-center mt-14 text-3xl text-white">Menu</h1>
         <ul className="flex flex-col gap-5  mt-10 text-xl text-black font-semibold">
-          <li className=" bg-yellow p-5 rounded-xl">
-            <Link href="/security">Secrurity</Link>
+          <li
+            className=" bg-yellow p-5 rounded-xl"
+            onClick={() => router.push("/security")}
+          >
+            <span>Secrurity</span>
           </li>
-          <li className="bg-yellow p-5 rounded-xl">
-            <Link href="/cash">Cash</Link>
+          <li
+            className="bg-yellow p-5 rounded-xl"
+            onClick={() => router.push("/cash")}
+          >
+            <span>Cash</span>
           </li>
         </ul>
       </div>
