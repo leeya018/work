@@ -31,6 +31,8 @@ const BillsCalculator: React.FC = () => {
     0
   );
 
+  console.log(totalSum);
+
   return (
     <div className="container mx-auto p-4">
       <h2 className="text-xl font-bold mb-4 text-center">Bills Calculator</h2>
@@ -38,33 +40,35 @@ const BillsCalculator: React.FC = () => {
         <div className="hidden md:block font-semibold">Bill Type</div>
         <div className="hidden md:block font-semibold">Amount of Bills</div>
         <div className="hidden md:block font-semibold">Total Value (₪)</div>
-        {bills.map((bill, index) => {
-          const total = calculateTotal(amounts[index], bill.value);
-          return (
-            <React.Fragment key={bill.name}>
-              <div className="flex items-center">
-                <img
-                  src={bill.image}
-                  alt={bill.name}
-                  className="w-12 h-12 mr-2"
+        <div className="flex flex-col items-center text-white gap-3">
+          {bills.map((bill, index) => {
+            const total = calculateTotal(amounts[index], bill.value);
+            return (
+              <React.Fragment key={bill.name}>
+                <div className="flex items-center">
+                  <img
+                    src={bill.image}
+                    alt={bill.name}
+                    className="w-12 h-12 mr-2"
+                  />
+                  <div>{bill.name}</div>
+                </div>
+                <input
+                  type="number"
+                  value={amounts[index]}
+                  onChange={(e) => handleAmountChange(index, e.target.value)}
+                  className="inp mt-2"
+                  placeholder="0"
                 />
-                <div>{bill.name}</div>
-              </div>
-              <input
-                type="number"
-                value={amounts[index]}
-                onChange={(e) => handleAmountChange(index, e.target.value)}
-                className="border p-2 w-full md:w-auto"
-                placeholder="0"
-              />
-              <div className="md:mt-0">{total.toFixed(2)} ₪</div>
-            </React.Fragment>
-          );
-        })}
-        <div className="col-span-2 md:col-span-2 font-semibold">
+                <div className="w-20">{total.toFixed(2)} ₪</div>
+              </React.Fragment>
+            );
+          })}
+        </div>
+        <div className="col-span-2 md:col-span-2 font-semibold text-xl text-white">
           Total Sum of All Bills:
         </div>
-        <div className="font-semibold">{totalSum.toFixed(2)} ₪</div>
+        <div className="font-semibold text-white">{totalSum.toFixed(2)} ₪</div>
       </div>
     </div>
   );

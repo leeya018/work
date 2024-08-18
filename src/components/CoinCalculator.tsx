@@ -76,7 +76,7 @@ const CoinCalculator: React.FC = () => {
   );
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4 text-white">
       <h2 className="text-xl font-bold mb-4 text-center">Coin Calculator</h2>
       <div className="flex flex-col gap-4">
         {/* <div className="grid grid-cols-1 md:grid-cols-4 gap-4"> */}
@@ -103,7 +103,7 @@ const CoinCalculator: React.FC = () => {
                     type="number"
                     value={weights[index]}
                     onChange={(e) => handleWeightChange(index, e.target.value)}
-                    className="border p-2 w-full md:w-auto"
+                    className="inp mt-2"
                     placeholder="0"
                   />
                 </div>
@@ -113,7 +113,7 @@ const CoinCalculator: React.FC = () => {
                     type="number"
                     value={amounts[index]}
                     onChange={(e) => handleAmountChange(index, e.target.value)}
-                    className="border p-2 w-full md:w-auto"
+                    className="inp mt-2"
                   />
                 </div>
 
@@ -122,10 +122,12 @@ const CoinCalculator: React.FC = () => {
             </div>
           );
         })}
-        <div className="col-span-3 md:col-span-3 font-semibold">
+        <div className="col-span-3 md:col-span-3 font-semibold text-xl text-white">
           Total Value of All Coins:
         </div>
-        <div className="font-semibold">{totalValue.toFixed(2)} ₪</div>
+        <div className="font-semibold text-xl text-white">
+          {totalValue.toFixed(2)} ₪
+        </div>
       </div>
     </div>
   );
