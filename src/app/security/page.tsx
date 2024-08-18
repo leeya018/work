@@ -15,7 +15,10 @@ export default function SecurityPage() {
         <h1 className="flex justify-center mt-14 text-3xl text-white">
           security
         </h1>
-        <div className="mt-10">
+        <div className="text-xl font-semibold text-white flex justify-center mt-4">
+          my code : 81719
+        </div>
+        <div className="mt-8">
           <ShiftsInfo title={TITLES.security} />
         </div>
       </div>
