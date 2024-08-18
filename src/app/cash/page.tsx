@@ -18,7 +18,12 @@ export default function CashPage() {
         <h1 className="flex justify-center mt-14 text-3xl text-white ">
           cash page
         </h1>
-
+        <div className="text-xl font-semibold text-white flex justify-center mt-4">
+          my code : 103
+        </div>
+        <div className="text-xl font-semibold text-white flex justify-center mt-4">
+          my hakafa : 555
+        </div>
         <div className="flex items-center justify-center gap-10 mt-10 text-xl font-semibold text-white">
           <button
             className={`${
