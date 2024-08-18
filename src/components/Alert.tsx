@@ -7,7 +7,7 @@ const Alert: React.FC = () => {
   return (
     <>
       {messageStore.message?.text && (
-        <div className="fixed bottom-0 right-0 left-0 py-5 bg-white shadow-lg rounded-lg z-50 w-full">
+        <div className="bg-gray-900 fixed bottom-0 right-0 left-0 py-5  shadow-lg rounded-lg z-50 w-full">
           <div
             className={`flex justify-center ${
               messageStore.message?.type === "error"

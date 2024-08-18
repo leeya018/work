@@ -14,7 +14,9 @@ export default function CashPage() {
     <ProtectedRoute>
       <div className="container min-h-screen p-10 bg-black">
         <Header />
-        <h1 className="flex justify-center mt-10 text-4xl ">cash page</h1>
+        <h1 className="flex justify-center mt-10 text-3xl text-white ">
+          cash page
+        </h1>
 
         <div className="flex items-center justify-center gap-10 mt-5 text-xl font-semibold text-white">
           <button

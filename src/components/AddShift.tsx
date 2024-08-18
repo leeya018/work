@@ -49,7 +49,7 @@ const AddShift = ({ title }: AddShiftProps) => {
 
   console.log(lastShift);
   return (
-    <div className="flex flex-col items-center gap-5">
+    <div className="flex flex-col items-center gap-5 text-white">
       <div className="flex justify-center items-center mt-5">
         <button
           onClick={lastShift && !lastShift.finishedAt ? endShift : startShift}
@@ -61,7 +61,7 @@ const AddShift = ({ title }: AddShiftProps) => {
       </div>
       {lastShift && !lastShift.finishedAt && (
         <div>
-          total times : {timeDifference(lastShift.startedAt, new Date())}
+          total time : {timeDifference(lastShift.startedAt, new Date())}
         </div>
       )}
     </div>
