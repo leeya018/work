@@ -1,16 +1,17 @@
 "use client";
 import BillsCalculator from "@/components/BillsCalculator";
-import Codes from "@/components/Codes";
+import Vegs from "@/components/Vegs";
 import CoinCalculator from "@/components/CoinCalculator";
 import Header from "@/components/Header";
 import ProtectedRoute from "@/components/protectedRoute";
 import ShiftsInfo from "@/components/ShiftsInfo";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export default function CashPage() {
   const [chosen, setChosen] = useState<string>("shifts");
   const router = useRouter();
+
   return (
     <ProtectedRoute>
       <div className="container min-h-screen p-10 bg-black">
@@ -58,7 +59,7 @@ export default function CashPage() {
         )}
 
         {chosen === "shifts" && <ShiftsInfo title={"cash"} />}
-        {chosen === "codes" && <Codes />}
+        {chosen === "codes" && <Vegs />}
       </div>
     </ProtectedRoute>
   );
