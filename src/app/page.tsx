@@ -6,6 +6,7 @@ import Image from "next/image";
 import userStore from "@/stores/userStore";
 import Header from "@/components/Header";
 import { useRouter } from "next/navigation";
+import { getDbUrl } from "@/util";
 
 export default function HomePage() {
   // const [billsAmounts, setAmounts] = useState<number[]>(Array(bills.length).fill(0));
@@ -32,6 +33,11 @@ export default function HomePage() {
             <span>Cash</span>
           </li>
         </ul>
+        <div className="mt-5 text-md underline">
+          <Link href={getDbUrl()} target="_blank">
+            <span>open db</span>
+          </Link>
+        </div>
       </div>
     </ProtectedRoute>
   );

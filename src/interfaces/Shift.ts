@@ -5,5 +5,4 @@ export type Shift = {
   title: string;
   startedAt: Timestamp;
   finishedAt?: Timestamp;
-  createdAt?: Timestamp;
 };

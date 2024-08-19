@@ -6,7 +6,7 @@ import Shifts from "@/components/Shifts";
 import ShiftsPerMonth from "@/components/ShiftsPerMonth";
 import { getAuth, signOut } from "firebase/auth";
 import { observer } from "mobx-react-lite";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const today = new Date();
 const curr_m = today.getMonth() + 1;
@@ -17,7 +17,7 @@ type ShiftsInfoProps = {
 };
 const ShiftsInfo = ({ title }: ShiftsInfoProps) => {
   const auth = getAuth();
-  const [chosen, setChosen] = useState<string>("shifts_per_m");
+  const [chosen, setChosen] = useState<string>("add_shift");
 
   return (
     <div className="text-white">

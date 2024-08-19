@@ -13,6 +13,7 @@ export const timeDifferenceDuration = (
 ) => {
   // Parse the dates using moment
   const format = "YYYY-MM-DD HH:mm:ss";
+  console.log(startDate);
   const start = moment(startDate.toDate(), format);
   let end = moment(endDate, format);
 
@@ -102,3 +103,10 @@ export const VEG_CODES: Veg[] = [
   { title: "קישוא", code: "50", correctNum: 0, inputValue: "" },
   { title: "אבטיח", code: "80", correctNum: 0, inputValue: "" },
 ];
+
+export const getDbUrl = () => {
+  if (process.env.NODE_ENV) {
+    return "https://console.firebase.google.com/u/0/project/apartments-invest/firestore";
+  }
+  return "https://console.firebase.google.com/u/0/project/dating-empire/firestore";
+};
