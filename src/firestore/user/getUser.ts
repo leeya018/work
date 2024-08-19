@@ -15,7 +15,7 @@ export const getUserApi = async (user: User) => {
       role: "user",
       displayName: user.displayName,
       photoURL: user.photoURL,
-      createdAt: new Date(),
+      startedAt: new Date(),
       lessons: [],
     });
   }

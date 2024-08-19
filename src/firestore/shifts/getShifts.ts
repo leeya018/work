@@ -32,9 +32,9 @@ export const getShiftsApi = async (
     collection(db, "shifts"),
     where("userId", "==", userId),
     where("title", "==", title),
-    where("createdAt", ">=", startTimestamp),
-    where("createdAt", "<=", endTimestamp),
-    orderBy("createdAt", "desc")
+    where("startedAt", ">=", startTimestamp),
+    where("startedAt", "<=", endTimestamp),
+    orderBy("startedAt", "desc")
   );
   const querySnapshot = await getDocs(q);
   const shifts = querySnapshot.docs.map((doc) => ({

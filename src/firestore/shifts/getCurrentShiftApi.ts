@@ -21,7 +21,7 @@ export const getCurrentShiftApi = async (
   const q = query(
     collection(db, "shifts"),
     where("userId", "==", userId),
-    orderBy("createdAt", "desc"),
+    orderBy("startedAt", "desc"),
     limit(1)
   );
   const querySnapshot = await getDocs(q);

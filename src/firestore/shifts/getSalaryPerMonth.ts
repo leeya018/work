@@ -33,8 +33,8 @@ export const getSalaryPerMonth = async (
     collection(db, "shifts"),
     where("userId", "==", userId),
     where("title", "==", title),
-    where("createdAt", ">=", startTimestamp),
-    where("createdAt", "<=", endTimestamp)
+    where("startedAt", ">=", startTimestamp),
+    where("startedAt", "<=", endTimestamp)
   );
   const querySnapshot = await getDocs(q);
   const shifts = querySnapshot.docs.map((doc) => ({
