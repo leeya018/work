@@ -113,6 +113,9 @@ export const getDbUrl = () => {
   return "https://console.firebase.google.com/u/0/project/dating-empire/firestore";
 };
 
+export const netlifyUrl = "https://app.netlify.com/sites/work-lee/deploys";
+export const githubUrl = "https://github.com/leeya018/work";
+
 const today = new Date();
 export const curr_m = today.getMonth() + 1;
 export const curr_y = today.getFullYear();

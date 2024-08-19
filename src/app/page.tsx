@@ -6,7 +6,14 @@ import Image from "next/image";
 import userStore from "@/stores/userStore";
 import Header from "@/components/Header";
 import { useRouter } from "next/navigation";
-import { curr_m, curr_y, getDbUrl, timeDifferenceDuration } from "@/util";
+import {
+  curr_m,
+  curr_y,
+  getDbUrl,
+  githubUrl,
+  netlifyUrl,
+  timeDifferenceDuration,
+} from "@/util";
 import { shiftStore } from "@/stores/shiftStore";
 import { getShiftsApi } from "@/firestore/shifts/getShifts";
 import { messageStore } from "@/stores/messageStore";
@@ -54,7 +61,7 @@ function HomePage() {
   };
   return (
     <ProtectedRoute>
-      <div className="container h-screen p-10 bg-black text-white">
+      <div className="container h-screen p-10 bg-black text-white flex flex-col">
         {/* header */}
         <Header />
         <h1 className="flex justify-center mt-14 text-3xl text-white">Menu</h1>
@@ -84,9 +91,15 @@ function HomePage() {
           )}
         </div>
         {userStore.user?.uid === process.env.NEXT_PUBLIC_USER_OWNER_ID && (
-          <div className="mt-5 text-md underline">
+          <div className=" text-md underline flex flex-col gap-3 items-center mt-auto">
             <Link href={getDbUrl()} target="_blank">
-              <span>open db</span>
+              <span>Firbase DB</span>
+            </Link>
+            <Link href={netlifyUrl} target="_blank">
+              <span>Netlify</span>
+            </Link>
+            <Link href={githubUrl} target="_blank">
+              <span>Github</span>
             </Link>
           </div>
         )}
