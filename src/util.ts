@@ -12,23 +12,27 @@ export const timeDifferenceDuration = (
   endDate: Date | Timestamp
 ) => {
   // Parse the dates using moment
-  const format = "YYYY-MM-DD HH:mm:ss";
-  console.log(startDate);
-  const start = moment(startDate.toDate(), format);
-  let end = moment(endDate, format);
+  try {
+    const format = "YYYY-MM-DD HH:mm:ss";
+    console.log(startDate);
+    const start = moment(startDate.toDate(), format);
+    let end = moment(endDate, format);
 
-  if (endDate instanceof Date) {
-    end = moment(endDate, format);
-  } else {
-    end = moment(endDate.toDate(), format);
+    if (endDate instanceof Date) {
+      end = moment(endDate, format);
+    } else {
+      end = moment(endDate.toDate(), format);
+    }
+
+    // Calculate the difference in milliseconds
+    const duration = moment.duration(end.diff(start));
+
+    // Extract hours and minutes
+
+    return duration;
+  } catch (error) {
+    console.log(error);
   }
-
-  // Calculate the difference in milliseconds
-  const duration = moment.duration(end.diff(start));
-
-  // Extract hours and minutes
-
-  return duration;
 };
 export const timeDifference = (
   startDate: Timestamp,
