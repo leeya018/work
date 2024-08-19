@@ -4,6 +4,7 @@ import ShiftCard from "./Shift";
 import { Shift } from "@/interfaces/Shift";
 import { shiftStore } from "@/stores/shiftStore";
 import { observer } from "mobx-react-lite";
+import { Timestamp } from "firebase/firestore";
 
 function Shifts() {
   const [totalWage, setTotalWage] = useState(-1);
@@ -23,8 +24,8 @@ function Shifts() {
     const totalHoursT = shiftStore.shifts.reduce((acc, shift) => {
       if (!shift?.finishedAt) return 0;
       const duration = timeDifferenceDuration(
-        shift.startedAt,
-        shift.finishedAt
+        shift.startedAt.toDate(),
+        shift.finishedAt.toDate()
       );
       return acc + duration.asHours();
     }, 0);

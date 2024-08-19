@@ -91,7 +91,7 @@ export default function ShiftCard({ shift }: ShiftPorps) {
 
       <div className="mt-2">
         {" "}
-        total: {timeDifference(startedAt, finishedAt)}
+        total: {timeDifference(startedAt.toDate(), finishedAt.toDate())}
       </div>
     </div>
   );

@@ -68,7 +68,8 @@ const AddShift = () => {
       {currentShift && (
         <div>
           {/* total time : {timeDifference(date123, new Date())} */}
-          total time : {timeDifference(currentShift.startedAt, new Date())}
+          total time :{" "}
+          {timeDifference(currentShift.startedAt.toDate(), new Date())}
         </div>
       )}
     </div>
