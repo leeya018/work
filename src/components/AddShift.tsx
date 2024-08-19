@@ -28,10 +28,13 @@ const AddShift = () => {
 
   const startShift = async () => {
     const shift = {
+      userId: userStore.user.uid,
       title: shiftStore.title,
       startedAt: Timestamp.now(),
+      finishedAt: Timestamp.now(),
     };
     localStorage.setItem("curr_shift", JSON.stringify(shift));
+    setCurrentShift(shift);
   };
   // console.log({ currentShift });
   const endShift = async () => {
