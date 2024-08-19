@@ -14,7 +14,6 @@ import { shiftStore } from "@/stores/shiftStore";
 const AddShift = () => {
   const [currentShift, setCurrentShift] = useState<Shift | null>(null);
 
-  console.log("=============AddShift============1");
   useEffect(() => {
     const localShiftStr = localStorage.getItem("curr_shift");
     if (localShiftStr) {
@@ -23,11 +22,8 @@ const AddShift = () => {
       myShift.startedAt = new Timestamp(seconds, nanoseconds);
       setCurrentShift(myShift);
     }
-    console.log("=============AddShift============useEffect");
 
-    return () => {
-      console.log("=============AddShift============useEffect done");
-    };
+    return () => {};
   }, []);
 
   const startShift = async () => {

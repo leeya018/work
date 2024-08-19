@@ -1,5 +1,7 @@
 import { updateShiftsApi } from "@/firestore/shifts/updateShift";
 import { Shift } from "@/interfaces/Shift";
+import { messageStore } from "@/stores/messageStore";
+import { shiftStore } from "@/stores/shiftStore";
 import userStore from "@/stores/userStore";
 import { convertTime, timeDifference } from "@/util";
 import { Timestamp } from "firebase/firestore";
@@ -26,7 +28,25 @@ export default function ShiftCard({ shift }: ShiftPorps) {
     return formattedDateTime;
   };
 
-  const updateShift = (date: Date) => {};
+  const updateShift = async () => {
+    try {
+      if (!shift.id) throw new Error("there is no id to shift");
+      const updatedShift = await updateShiftsApi(userStore.user.uid, shift.id, {
+        startedAt: Timestamp.fromDate(startDate),
+        finishedAt: Timestamp.fromDate(endDate),
+      });
+      if (!updatedShift)
+        throw new Error("there was a problem with updating the shift");
+      shiftStore.updateShift(updatedShift);
+      messageStore.setMessage({
+        type: "success",
+        text: `Shift ${shift.id} updated succesfully`,
+      });
+    } catch (e: any) {
+      messageStore.setMessage({ type: "error", text: e.message });
+    }
+  };
+
   return (
     <div className="relative shadow-md bg-yellow p-3 rounded-xl text-lg font-medium text-black">
       <div
@@ -35,15 +55,7 @@ export default function ShiftCard({ shift }: ShiftPorps) {
           setCanEdit((prev) => {
             if (prev) {
               // updaet the data
-              try {
-                if (!shift.id) throw new Error("there is no id to shift");
-                updateShiftsApi(userStore.user.uid, shift.id, {
-                  startedAt: Timestamp.fromDate(startDate),
-                  finishedAt: Timestamp.fromDate(endDate),
-                });
-              } catch (error) {
-                console.log(error);
-              }
+              updateShift();
             }
             return !prev;
           })

@@ -21,7 +21,7 @@ class ShiftStore {
     makeAutoObservable(this);
     this.getData();
     autorun((): void => {
-      console.log(`myObservable changed to:`);
+      console.log(`shifts data changed :`);
       this.getData();
     });
   }
@@ -46,6 +46,11 @@ class ShiftStore {
   }
   setShifts(shifts: Shift[]) {
     this.shifts = shifts;
+  }
+  updateShift(updatedShift: Shift) {
+    this.shifts = this.shifts.map((shift) =>
+      shift.id === updatedShift.id ? updatedShift : shift
+    );
   }
   setChosen(shift: Shift) {
     this.chosen = shift;
