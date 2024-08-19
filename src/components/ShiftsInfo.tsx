@@ -4,6 +4,11 @@ import Alert from "@/components/Alert";
 import ProtectedRoute from "@/components/protectedRoute";
 import Shifts from "@/components/Shifts";
 import ShiftsPerMonth from "@/components/ShiftsPerMonth";
+import { getShiftsApi } from "@/firestore/shifts/getShifts";
+import useFetchShifts from "@/hooks/useFetchShifts";
+import { Shift } from "@/interfaces/Shift";
+import { messageStore } from "@/stores/messageStore";
+import userStore from "@/stores/userStore";
 import { getAuth, signOut } from "firebase/auth";
 import { observer } from "mobx-react-lite";
 import React, { useEffect, useState } from "react";
@@ -16,7 +21,6 @@ type ShiftsInfoProps = {
   title: string;
 };
 const ShiftsInfo = ({ title }: ShiftsInfoProps) => {
-  const auth = getAuth();
   const [chosen, setChosen] = useState<string>("add_shift");
 
   return (
@@ -52,19 +56,10 @@ const ShiftsInfo = ({ title }: ShiftsInfoProps) => {
         <Shifts title={title} month={curr_m} year={curr_y} />
       )}
       {chosen === "shifts_per_m" && <ShiftsPerMonth title={title} />}
-      {/* <ShiftSum />  */}
+
       <Alert />
-      {/* <TotalSumShifts />  */}
-      {/* totalShift */}
     </div>
   );
 };
 
 export default observer(ShiftsInfo);
-
-// thisn i need
-//  db - add shift , get shifts , updateShift ( with the end time. )
-//  functions - getShiftByWorkName, getTotalHoursByName , getTotalSalarayByName,
-// items to use - hook for getign the data .
-//  components - Shifts , Shift , TotalSumShift( show hours and totalMoney)
-// interfaces - Shift - startAt , finishAt ,

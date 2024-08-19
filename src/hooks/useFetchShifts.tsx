@@ -1,6 +1,7 @@
 import { getShiftsApi } from "@/firestore/shifts/getShifts";
 import { Shift } from "@/interfaces/Shift";
 import { messageStore } from "@/stores/messageStore";
+import { shiftStore } from "@/stores/shiftStore";
 import userStore from "@/stores/userStore";
 import { useEffect, useState } from "react";
 
@@ -9,29 +10,25 @@ export default function useFetchShifts(
   year: number,
   month: number
 ) {
-  const [shifts, setShifts] = useState<Shift[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-
   useEffect(() => {
-    setIsLoading(true);
+    shiftStore.setIsLoading(true);
     if (userStore.user && title) {
       getShiftsApi(userStore.user.uid, title, year, month)
         .then((shiftsItems) => {
-          setShifts(shiftsItems);
+          shiftStore.setShifts(shiftsItems);
           messageStore.setMessage({
             type: "success",
             text: "fetch shifts succesfully",
           });
-          setIsLoading(false);
+          shiftStore.setIsLoading(false);
+          shiftStore.setShifts(shiftsItems);
         })
         .catch((err: any) => {
           console.log(err);
-          setIsLoading(false);
+          shiftStore.setIsLoading(false);
 
           messageStore.setMessage({ type: "error", text: err.message });
         });
     }
   }, [userStore.user, title, year, month]);
-
-  return { shifts, isLoading };
 }

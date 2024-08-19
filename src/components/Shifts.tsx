@@ -1,28 +1,32 @@
-import useFetchShifts from "@/hooks/useFetchShifts";
 import { timeDifferenceDuration, TITLES } from "@/util";
 import React, { use, useEffect, useState } from "react";
 import ShiftCard from "./Shift";
+import { Shift } from "@/interfaces/Shift";
+import useFetchShifts from "@/hooks/useFetchShifts";
+import { shiftStore } from "@/stores/shiftStore";
+import { observer } from "mobx-react-lite";
 
 type ShiftsProps = {
   title: string;
   year: number;
   month: number;
 };
-export default function Shifts({ title, year, month }: ShiftsProps) {
-  const { isLoading, shifts } = useFetchShifts(title, year, month);
+
+function Shifts({ title, year, month }: ShiftsProps) {
   const [totalWage, setTotalWage] = useState(-1);
   const [totalHours, setTotalHours] = useState(-1);
+  useFetchShifts(title, year, month);
 
   useEffect(() => {
     setTotalHours(-1);
     setTotalWage(-1);
   }, [title, year, month]);
 
-  console.log(shifts);
+  // console.log(shifts);
 
   const calculate = () => {
     const rate = 35;
-    const totalHoursT = shifts.reduce((acc, shift) => {
+    const totalHoursT = shiftStore.shifts.reduce((acc, shift) => {
       if (!shift?.finishedAt) return 0;
       const duration = timeDifferenceDuration(
         shift.startedAt,
@@ -38,26 +42,26 @@ export default function Shifts({ title, year, month }: ShiftsProps) {
   };
   return (
     <div>
-      {isLoading && title && (
+      {shiftStore.isLoading && title && (
         <div className="mt-5 text-xl font-semibold text-white flex justify-center">
           Loading ...
         </div>
       )}
-      {!isLoading && shifts.length === 0 && (
+      {!shiftStore.isLoading && shiftStore.shifts.length === 0 && (
         <div className="mt-5 text-md  text-white flex justify-center">
           -- No shifts --
         </div>
       )}
-      {!isLoading && shifts.length > 0 && (
+      {!shiftStore.isLoading && shiftStore.shifts.length > 0 && (
         <ul className="mt-5 flex flex-col gap-3">
-          {shifts.map((shift, key) => (
+          {shiftStore.shifts.map((shift, key) => (
             <li key={key} className="w-full px-4">
               <ShiftCard shift={shift} />
             </li>
           ))}
         </ul>
       )}
-      {shifts.length > 0 && !isLoading && (
+      {shiftStore.shifts.length > 0 && !shiftStore.isLoading && (
         <div>
           {totalHours == -1 || totalWage == -1 ? (
             <div className="flex justify-center mt-5">
@@ -76,3 +80,5 @@ export default function Shifts({ title, year, month }: ShiftsProps) {
     </div>
   );
 }
+
+export default observer(Shifts);

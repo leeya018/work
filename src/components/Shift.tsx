@@ -26,6 +26,7 @@ export default function ShiftCard({ shift }: ShiftPorps) {
     return formattedDateTime;
   };
 
+  const updateShift = (date: Date) => {};
   return (
     <div className="relative shadow-md bg-yellow p-3 rounded-xl text-lg font-medium text-black">
       <div
