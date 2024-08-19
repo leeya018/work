@@ -7,15 +7,16 @@ export const TITLES = {
   cash: "cash",
   security: "security",
 };
+
+const TIME_FORMAT = "DD/MM/YY HH:mm";
 export const timeDifferenceDuration = (startDate: Date, endDate: Date) => {
   // Parse the dates using moment
 
   try {
-    const format = "YYYY-MM-DD HH:mm:ss";
     console.log(startDate);
-    let start = moment(startDate, format);
+    let start = moment(startDate, TIME_FORMAT);
 
-    let end = moment(endDate, format);
+    let end = moment(endDate, TIME_FORMAT);
 
     // Calculate the difference in milliseconds
     const duration = moment.duration(end.diff(start));
@@ -49,7 +50,7 @@ export const convertTime = (timestamp: Timestamp) => {
     const date = timestamp.toDate();
 
     // Convert Date to moment object and format as YYYY-MM-DD
-    return moment(date).format("YYYY-MM-DD HH:mm:ss");
+    return moment(date).format(TIME_FORMAT);
   } catch (error: any) {
     console.log("function - convertTime" + error.message);
   }

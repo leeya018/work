@@ -11,8 +11,9 @@ import { shiftStore } from "@/stores/shiftStore";
 import { getShiftsApi } from "@/firestore/shifts/getShifts";
 import { messageStore } from "@/stores/messageStore";
 import { Shift } from "@/interfaces/Shift";
+import { observer } from "mobx-react-lite";
 
-export default function HomePage() {
+function HomePage() {
   // const [billsAmounts, setAmounts] = useState<number[]>(Array(bills.length).fill(0));
   const router = useRouter();
   const [totalWage, setTotalWage] = useState(-1);
@@ -56,7 +57,6 @@ export default function HomePage() {
       <div className="container h-screen p-10 bg-black text-white">
         {/* header */}
         <Header />
-
         <h1 className="flex justify-center mt-14 text-3xl text-white">Menu</h1>
         <ul className="flex flex-col gap-5  mt-10 text-xl text-black font-semibold">
           <li
@@ -83,19 +83,15 @@ export default function HomePage() {
             </div>
           )}
         </div>
-        <div className="mt-5 text-md underline">
-          <Link href={getDbUrl()} target="_blank">
-            <span>open db</span>
-          </Link>
-        </div>
+        {userStore.user?.uid === process.env.NEXT_PUBLIC_USER_OWNER_ID && (
+          <div className="mt-5 text-md underline">
+            <Link href={getDbUrl()} target="_blank">
+              <span>open db</span>
+            </Link>
+          </div>
+        )}
       </div>
     </ProtectedRoute>
   );
 }
-
-// cash
-// shifts
-// count
-
-//  security
-// shifts
+export default observer(HomePage);
