@@ -71,7 +71,7 @@ export default function ShiftCard({ shift }: ShiftPorps) {
             className="inp mt-5"
           />
         ) : (
-          <div>start: {convertTime(startedAt)}</div>
+          <div>{startedAt && <div>start: {convertTime(startedAt)}</div>}</div>
         )}
       </div>
 
@@ -85,13 +85,13 @@ export default function ShiftCard({ shift }: ShiftPorps) {
             onChange={(e) => setEndDate(new Date(e.target.value))}
           />
         ) : (
-          <div>end: {convertTime(finishedAt)}</div>
+          <div>{finishedAt && <div>end: {convertTime(finishedAt)}</div>}</div>
         )}
       </div>
 
       <div className="mt-2">
         {" "}
-        total: {timeDifference(startedAt.toDate(), finishedAt.toDate())}
+        total: {timeDifference(startedAt.toDate(), finishedAt.toDate())} h
       </div>
     </div>
   );
