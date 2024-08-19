@@ -14,11 +14,11 @@ type ShiftPorps = {
 };
 export default function ShiftCard({ shift }: ShiftPorps) {
   const { startedAt, finishedAt } = shift;
-
+  if (!shift) console.log("no shift in ShiftCard");
   const [canEdit, setCanEdit] = useState(false);
 
-  const [startDate, setStartDate] = useState<Date>(startedAt.toDate());
-  const [endDate, setEndDate] = useState<Date>(finishedAt.toDate());
+  const [startDate, setStartDate] = useState<Date>(startedAt?.toDate());
+  const [endDate, setEndDate] = useState<Date>(finishedAt?.toDate());
 
   const convertDate = (date: Date) => {
     // Adjust the date to the local timezone

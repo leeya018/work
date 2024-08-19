@@ -30,8 +30,8 @@ export const timeDifferenceDuration = (
     // Extract hours and minutes
 
     return duration;
-  } catch (error) {
-    console.log(error);
+  } catch (error: any) {
+    console.log("function - timeDifferenceDuration" + error.message);
   }
 };
 export const timeDifference = (
@@ -52,10 +52,14 @@ export const timeDifference = (
 };
 
 export const convertTime = (timestamp: Timestamp) => {
-  const date = timestamp.toDate();
+  try {
+    const date = timestamp.toDate();
 
-  // Convert Date to moment object and format as YYYY-MM-DD
-  return moment(date).format("YYYY-MM-DD HH:mm:ss");
+    // Convert Date to moment object and format as YYYY-MM-DD
+    return moment(date).format("YYYY-MM-DD HH:mm:ss");
+  } catch (error: any) {
+    console.log("function - convertTime" + error.message);
+  }
 };
 
 export const MONTHS = [
