@@ -111,3 +111,7 @@ export const getDbUrl = () => {
   }
   return "https://console.firebase.google.com/u/0/project/dating-empire/firestore";
 };
+
+const today = new Date();
+export const curr_m = today.getMonth() + 1;
+export const curr_y = today.getFullYear();

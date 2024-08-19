@@ -28,14 +28,17 @@ export const getShiftsApi = async (
   const startTimestamp = Timestamp.fromDate(startOfMonth);
   const endTimestamp = Timestamp.fromDate(endOfMonth);
 
-  const q = query(
+  let q = query(
     collection(db, "shifts"),
     where("userId", "==", userId),
-    where("title", "==", title),
     where("startedAt", ">=", startTimestamp),
     where("startedAt", "<=", endTimestamp),
     orderBy("startedAt", "desc")
   );
+  if (title !== "") {
+    q = query(q, where("title", "==", title));
+  }
+
   const querySnapshot = await getDocs(q);
   const shifts = querySnapshot.docs.map((doc) => ({
     id: doc.id,

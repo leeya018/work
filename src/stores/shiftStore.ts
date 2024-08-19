@@ -4,10 +4,7 @@ import { Shift } from "@/interfaces/Shift";
 import { autorun, makeAutoObservable } from "mobx";
 import userStore from "./userStore";
 import { messageStore } from "./messageStore";
-
-const today = new Date();
-const curr_m = today.getMonth() + 1;
-const curr_y = today.getFullYear();
+import { curr_m, curr_y } from "@/util";
 
 class ShiftStore {
   shifts: Shift[] = [];
