@@ -4,5 +4,5 @@ export type Shift = {
   id?: string;
   title: string;
   startedAt: Timestamp;
-  finishedAt?: Timestamp;
+  finishedAt: Timestamp;
 };
