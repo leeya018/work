@@ -10,7 +10,7 @@ import { observer } from "mobx-react-lite";
 import React from "react";
 
 function SecurityPage() {
-  shiftStore.setTitle("cash");
+  shiftStore.setTitle(TITLES.security);
 
   return (
     <ProtectedRoute>

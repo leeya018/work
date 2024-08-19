@@ -9,12 +9,13 @@ import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { shiftStore } from "@/stores/shiftStore";
 import { observer } from "mobx-react-lite";
+import { TITLES } from "@/util";
 
 function CashPage() {
   const [chosen, setChosen] = useState<string>("shifts");
   const router = useRouter();
 
-  shiftStore.setTitle("cash");
+  shiftStore.setTitle(TITLES.cash);
 
   return (
     <ProtectedRoute>
