@@ -7,6 +7,7 @@ import { convertTime, timeDifference } from "@/util";
 import { Timestamp } from "firebase/firestore";
 import React, { useState } from "react";
 import { FaEdit } from "react-icons/fa";
+import { MdDownloadDone } from "react-icons/md";
 
 type ShiftPorps = {
   shift: Shift;
@@ -49,19 +50,17 @@ export default function ShiftCard({ shift }: ShiftPorps) {
 
   return (
     <div className="relative shadow-md bg-yellow p-3 rounded-xl text-lg font-medium text-black">
-      <div
-        className="absolute top-2 right-2 cursor-pointer "
-        onClick={() =>
-          setCanEdit((prev) => {
-            if (prev) {
-              // updaet the data
+      <div className="absolute top-2 right-2 cursor-pointer ">
+        {canEdit ? (
+          <MdDownloadDone
+            onClick={() => {
+              setCanEdit(false);
               updateShift();
-            }
-            return !prev;
-          })
-        }
-      >
-        <FaEdit />
+            }}
+          />
+        ) : (
+          <FaEdit onClick={() => setCanEdit(true)} />
+        )}
       </div>
       <div>
         {canEdit ? (
@@ -69,6 +68,7 @@ export default function ShiftCard({ shift }: ShiftPorps) {
             type="datetime-local"
             value={convertDate(startDate)}
             onChange={(e) => setStartDate(new Date(e.target.value))}
+            className="inp mt-5"
           />
         ) : (
           <div>start: {convertTime(startedAt)}</div>
@@ -79,6 +79,7 @@ export default function ShiftCard({ shift }: ShiftPorps) {
       <div className="mt-2">
         {canEdit ? (
           <input
+            className="inp "
             type="datetime-local"
             value={convertDate(endDate)}
             onChange={(e) => setEndDate(new Date(e.target.value))}
