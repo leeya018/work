@@ -9,6 +9,7 @@ export const TITLES = {
 };
 export const timeDifferenceDuration = (startDate: Date, endDate: Date) => {
   // Parse the dates using moment
+
   try {
     const format = "YYYY-MM-DD HH:mm:ss";
     console.log(startDate);
@@ -24,6 +25,7 @@ export const timeDifferenceDuration = (startDate: Date, endDate: Date) => {
     return duration;
   } catch (error: any) {
     console.log("function - timeDifferenceDuration" + error.message);
+    console.log({ startDate, endDate });
   }
 };
 export const timeDifference = (startDate: Date, endDate: Date) => {
