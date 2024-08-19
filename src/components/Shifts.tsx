@@ -2,25 +2,19 @@ import { timeDifferenceDuration, TITLES } from "@/util";
 import React, { use, useEffect, useState } from "react";
 import ShiftCard from "./Shift";
 import { Shift } from "@/interfaces/Shift";
-import useFetchShifts from "@/hooks/useFetchShifts";
 import { shiftStore } from "@/stores/shiftStore";
 import { observer } from "mobx-react-lite";
 
-type ShiftsProps = {
-  title: string;
-  year: number;
-  month: number;
-};
-
-function Shifts({ title, year, month }: ShiftsProps) {
+function Shifts() {
   const [totalWage, setTotalWage] = useState(-1);
   const [totalHours, setTotalHours] = useState(-1);
-  useFetchShifts(title, year, month);
+
+  // useFetchShifts(shiftStore.title, shiftStore.year, shiftStore.month);
 
   useEffect(() => {
     setTotalHours(-1);
     setTotalWage(-1);
-  }, [title, year, month]);
+  }, [shiftStore.title, shiftStore.year, shiftStore.month]);
 
   // console.log(shifts);
 
@@ -42,7 +36,7 @@ function Shifts({ title, year, month }: ShiftsProps) {
   };
   return (
     <div>
-      {shiftStore.isLoading && title && (
+      {shiftStore.isLoading && shiftStore.title && (
         <div className="mt-5 text-xl font-semibold text-white flex justify-center">
           Loading ...
         </div>

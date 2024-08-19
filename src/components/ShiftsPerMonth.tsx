@@ -3,48 +3,35 @@ import Shifts from "./Shifts";
 import { MONTHS, YEARS } from "@/util";
 import { title } from "process";
 import Select from "@/ui/Select";
+import { shiftStore } from "@/stores/shiftStore";
+import { observer } from "mobx-react-lite";
 
-const today = new Date();
-const curr_m = today.getMonth() + 1;
-const curr_y = today.getFullYear();
-
-type ShiftsPerMonthProps = {
-  title: string;
-};
-export default function ShiftsPerMonth({ title }: ShiftsPerMonthProps) {
-  const [chosenMonth, setChosenMonth] = useState(curr_m);
-  const [chosenYear, setChosenYear] = useState(curr_y);
-
-  const handleChangeM = (event: any) => {
-    setChosenMonth(event.target.value);
-  };
-  const handleChangeY = (event: any) => {
-    setChosenYear(event.target.value);
-  };
-
+function ShiftsPerMonth() {
   return (
     <div>
       {/* slects */}
       <div className="flex justify-center gap-4 mt-5">
         <Select
           options={MONTHS}
-          onChange={handleChangeM}
+          onChange={(e: any) => shiftStore.setMonth(e.target.value)}
           name="month"
           id="month"
-          value={chosenMonth}
+          value={shiftStore.month}
         />
         <Select
           name="year"
           id="year"
-          value={chosenYear}
-          onChange={handleChangeY}
+          value={shiftStore.year}
+          onChange={(e: any) => shiftStore.setYear(e.target.value)}
           options={YEARS}
         />
       </div>
 
       <div>
-        <Shifts title={title} month={chosenMonth} year={chosenYear} />
+        <Shifts />
       </div>
     </div>
   );
 }
+
+export default observer(ShiftsPerMonth);

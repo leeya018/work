@@ -19,7 +19,7 @@ export default function SecurityPage() {
           my code : 81719
         </div>
         <div className="mt-8">
-          <ShiftsInfo title={TITLES.security} />
+          <ShiftsInfo />
         </div>
       </div>
     </ProtectedRoute>

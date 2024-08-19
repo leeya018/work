@@ -7,10 +7,14 @@ import ProtectedRoute from "@/components/protectedRoute";
 import ShiftsInfo from "@/components/ShiftsInfo";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import { shiftStore } from "@/stores/shiftStore";
+import { observer } from "mobx-react-lite";
 
-export default function CashPage() {
+function CashPage() {
   const [chosen, setChosen] = useState<string>("shifts");
   const router = useRouter();
+
+  shiftStore.setTitle("cash");
 
   return (
     <ProtectedRoute>
@@ -58,9 +62,11 @@ export default function CashPage() {
           </div>
         )}
 
-        {chosen === "shifts" && <ShiftsInfo title={"cash"} />}
+        {chosen === "shifts" && <ShiftsInfo />}
         {chosen === "codes" && <Vegs />}
       </div>
     </ProtectedRoute>
   );
 }
+
+export default observer(CashPage);

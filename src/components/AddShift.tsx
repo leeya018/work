@@ -9,22 +9,12 @@ import { getCurrentShiftApi } from "@/firestore/shifts/getCurrentShiftApi";
 import { Shift } from "@/interfaces/Shift";
 import { updateShiftsApi } from "@/firestore/shifts/updateShift";
 import { Timestamp } from "firebase/firestore";
-type AddShiftProps = {
-  title: string;
-};
+import { shiftStore } from "@/stores/shiftStore";
 
-// const date123 = Timestamp.now();
-const AddShift = ({ title }: AddShiftProps) => {
+const AddShift = () => {
   const [currentShift, setCurrentShift] = useState<Shift | null>(null);
 
-  // useEffect(() => {
-  //   getCurrentShiftApi(userStore.user.uid, title)
-  //     .then((shiftItem) => {
-  //       setLastShift(shiftItem);
-  //     })
-  //     .catch((err) => console.log(err));
-  // }, []);
-
+  console.log("=============AddShift============1");
   useEffect(() => {
     const localShiftStr = localStorage.getItem("curr_shift");
     if (localShiftStr) {
@@ -33,11 +23,16 @@ const AddShift = ({ title }: AddShiftProps) => {
       myShift.startedAt = new Timestamp(seconds, nanoseconds);
       setCurrentShift(myShift);
     }
+    console.log("=============AddShift============useEffect");
+
+    return () => {
+      console.log("=============AddShift============useEffect done");
+    };
   }, []);
 
   const startShift = async () => {
     const shift = {
-      title,
+      title: shiftStore.title,
       startedAt: Timestamp.now(),
     };
     localStorage.setItem("curr_shift", JSON.stringify(shift));
@@ -68,8 +63,8 @@ const AddShift = ({ title }: AddShiftProps) => {
       <div className="flex justify-center items-center mt-5">
         <button
           onClick={currentShift ? endShift : startShift}
-          className={`${title === "" ? "dis-btn" : "btn"}`}
-          disabled={title === ""}
+          className={`${shiftStore.title === "" ? "dis-btn" : "btn"}`}
+          disabled={shiftStore.title === ""}
         >
           {currentShift ? "end shift" : "start shift"}
         </button>
