@@ -25,7 +25,7 @@ const Header = () => {
     <div className="absolute left-0 right-0 w-screen top-0 h-20 flex items-center justify-between px-4">
       <button
         className="btn font-bold h-12 w-12 flex justify-center items-center"
-        onClick={() => router.back()}
+        onClick={() => router.push("/")}
       >
         <IoArrowBackOutline size={40} />
       </button>

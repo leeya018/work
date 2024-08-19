@@ -3,11 +3,15 @@
 import Header from "@/components/Header";
 import ProtectedRoute from "@/components/protectedRoute";
 import ShiftsInfo from "@/components/ShiftsInfo";
+import { shiftStore } from "@/stores/shiftStore";
 import { TITLES } from "@/util";
+import { observer } from "mobx-react-lite";
 
 import React from "react";
 
-export default function SecurityPage() {
+function SecurityPage() {
+  shiftStore.setTitle("cash");
+
   return (
     <ProtectedRoute>
       <div className="container min-h-screen p-10 bg-black">
@@ -25,3 +29,4 @@ export default function SecurityPage() {
     </ProtectedRoute>
   );
 }
+export default observer(SecurityPage);
