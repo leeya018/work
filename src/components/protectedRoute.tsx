@@ -32,7 +32,13 @@ const ProtectedRoute: FC<ProtectedRouteProps> = observer(({ children }) => {
   }, [router]);
 
   if (isLoading) {
-    return <div>Loading ....</div>;
+    return (
+      <div className="w-screen h-screen flex justify-center items-center  bg-login bg-cover bg-center">
+        <span className="text-white shadow-sm text-5xl  font-semibold">
+          Loading ...
+        </span>
+      </div>
+    );
   }
   return isAuthenticated ? <div>{children}</div> : null;
 });
