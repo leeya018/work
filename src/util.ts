@@ -45,6 +45,7 @@ export const timeDifference = (startDate: Date, endDate: Date) => {
 
 export const convertTime = (timestamp: Timestamp) => {
   try {
+    if (!timestamp) throw new Error("timestamp date is not defind");
     const date = timestamp.toDate();
 
     // Convert Date to moment object and format as YYYY-MM-DD
