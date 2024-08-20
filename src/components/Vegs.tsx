@@ -2,10 +2,12 @@ import { Veg } from "@/interfaces/Veg";
 import GreenCheckMark from "@/ui/GreenCheckMark";
 import RedXMark from "@/ui/RedXMark";
 import { VEG_CODES } from "@/util";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 export default function Vegs() {
   const [vegCodes, setVegCodes] = useState(VEG_CODES);
+
+  const inputRefs = useRef([]); // Array of refs for each input
 
   useEffect(() => {
     const storageVegs = localStorage.getItem("vegCodes");
@@ -20,6 +22,8 @@ export default function Vegs() {
       );
       setVegCodes(sortedVegs);
     }
+    // Focus on the first input after loading
+    inputRefs.current[0]?.focus();
   }, []);
 
   const reload = () => {
@@ -31,24 +35,35 @@ export default function Vegs() {
       (v1: Veg, v2: Veg) => v1.correctNum - v2.correctNum
     );
     setVegCodes(sortedVegs);
+    inputRefs.current[0]?.focus(); // Focus on the first input after reload
   };
-
-  console.log({ vegCodes });
 
   const handleInputChange = (index: number, value: string) => {
     const newVegCodes = [...vegCodes];
 
+    let newCorrectNum = newVegCodes[index].correctNum;
     // Check if the input matches the code
     if (value === newVegCodes[index].code) {
       // Increment correctNum if the code matches
-      newVegCodes[index] = {
-        ...newVegCodes[index],
-        correctNum: newVegCodes[index].correctNum + 1,
-        inputValue: (newVegCodes[index].inputValue = value),
-      };
-
-      localStorage.setItem("vegCodes", JSON.stringify(newVegCodes));
+      newCorrectNum += 1;
+      // Move focus to the next input
+      const nextInput = inputRefs.current[index + 1];
+      if (nextInput) {
+        nextInput.focus();
+      }
+    } else if (
+      newVegCodes[index].inputValue.length === 2 &&
+      newVegCodes[index].inputValue !== newVegCodes[index].code
+    ) {
+      newCorrectNum -= 1;
     }
+
+    newVegCodes[index] = {
+      ...newVegCodes[index],
+      correctNum: newCorrectNum,
+      inputValue: (newVegCodes[index].inputValue = value),
+    };
+    localStorage.setItem("vegCodes", JSON.stringify(newVegCodes));
 
     // Update the input value
     newVegCodes[index].inputValue = value;
@@ -61,13 +76,12 @@ export default function Vegs() {
 
   return (
     <div className="text-white mt-4">
-      {isBtnActive && (
-        <div className="flex justify-center items-center my-5">
-          <button className="btn" onClick={reload}>
-            reload
-          </button>
-        </div>
-      )}
+      <div className="flex justify-center items-center my-5 gap-2">
+        <button className="btn" onClick={reload}>
+          reload
+        </button>
+      </div>
+
       <ul className="flex flex-col gap-2">
         {vegCodes.map((vegCode, index) => (
           <li key={index} className="">
@@ -75,6 +89,8 @@ export default function Vegs() {
               <div>{vegCode.title}</div>
               <input
                 type="number"
+                max={2}
+                ref={(el) => (inputRefs.current[index] = el)} // Attach the ref to the input
                 className="inp"
                 value={vegCode.inputValue || ""}
                 disabled={vegCode.inputValue === vegCode.code}
@@ -83,6 +99,8 @@ export default function Vegs() {
               />
               <div>
                 {vegCode.inputValue === vegCode.code && <GreenCheckMark />}
+                {vegCode.inputValue.length === 2 &&
+                  vegCode.inputValue !== vegCode.code && <RedXMark />}
               </div>
               <div>{vegCode.correctNum}</div>
             </div>
