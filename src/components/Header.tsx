@@ -6,7 +6,10 @@ import { useRouter } from "next/navigation";
 import { IoArrowBackOutline } from "react-icons/io5";
 import { getAuth, signOut } from "firebase/auth";
 
-const Header = () => {
+type HeaderPorps = {
+  handleChosenComp: any;
+};
+const Header = ({ handleChosenComp }: HeaderPorps) => {
   const router = useRouter();
   const auth = getAuth();
 
@@ -25,7 +28,7 @@ const Header = () => {
     <div className="absolute left-0 right-0 w-screen top-0 h-20 flex items-center justify-between px-4">
       <button
         className="btn font-bold h-12 w-12 flex justify-center items-center"
-        onClick={() => router.push("/")}
+        onClick={() => handleChosenComp("home")}
       >
         <IoArrowBackOutline size={40} />
       </button>

@@ -9,13 +9,12 @@ import { observer } from "mobx-react-lite";
 
 import React from "react";
 
-function SecurityPage() {
+function SecurityView() {
   shiftStore.setTitle(TITLES.security);
 
   return (
-    <ProtectedRoute>
+    <div>
       <div className="container min-h-screen p-10 bg-black">
-        <Header />
         <h1 className="flex justify-center mt-14 text-3xl text-white">
           security
         </h1>
@@ -26,7 +25,7 @@ function SecurityPage() {
           <ShiftsInfo />
         </div>
       </div>
-    </ProtectedRoute>
+    </div>
   );
 }
-export default observer(SecurityPage);
+export default observer(SecurityView);

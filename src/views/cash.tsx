@@ -11,16 +11,15 @@ import { shiftStore } from "@/stores/shiftStore";
 import { observer } from "mobx-react-lite";
 import { TITLES } from "@/util";
 
-function CashPage() {
+function CashView() {
   const [chosen, setChosen] = useState<string>("shifts");
   const router = useRouter();
 
   shiftStore.setTitle(TITLES.cash);
 
   return (
-    <ProtectedRoute>
+    <div>
       <div className="container min-h-screen p-10 bg-black">
-        <Header />
         <h1 className="flex justify-center mt-14 text-3xl text-white ">
           cash page
         </h1>
@@ -66,8 +65,8 @@ function CashPage() {
         {chosen === "shifts" && <ShiftsInfo />}
         {chosen === "codes" && <Vegs />}
       </div>
-    </ProtectedRoute>
+    </div>
   );
 }
 
-export default observer(CashPage);
+export default observer(CashView);
