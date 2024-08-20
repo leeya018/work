@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
 interface Coin {
   name: string;
@@ -50,6 +50,8 @@ const CoinCalculator: React.FC = () => {
   >([]);
   const [coinOptions, setCoinOptions] = useState<Coin[]>(coins);
 
+  const inputRef = useRef<HTMLInputElement | null>(null);
+
   const handleWeightChange = (value: string) => {
     const newWeight = parseFloat(value) || 0;
     setWeight(newWeight);
@@ -76,6 +78,8 @@ const CoinCalculator: React.FC = () => {
     setSelectedCoinIndex(0);
     setWeight(0);
     setAmount(0);
+    // focus
+    inputRef.current?.focus();
   };
 
   const handleRemoveCoin = (index: number) => {
@@ -151,6 +155,7 @@ const CoinCalculator: React.FC = () => {
             <div className="flex items-center gap-2">
               <span>Weight (g): </span>
               <input
+                ref={inputRef}
                 type="number"
                 value={isNaN(weight) ? "" : weight}
                 onFocus={() => handleFocus(setWeight, weight)}

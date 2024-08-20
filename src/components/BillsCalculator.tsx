@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
 interface Bill {
   name: string;
@@ -21,6 +21,8 @@ const BillsCalculator: React.FC = () => {
   >([]);
   const [billOptions, setBillOptions] = useState<Bill[]>(bills);
 
+  const inputRef = useRef<HTMLInputElement | null>(null);
+
   const handleAmountChange = (value: string) => {
     setAmount(parseInt(value, 10) || 0);
   };
@@ -38,6 +40,8 @@ const BillsCalculator: React.FC = () => {
     setBillOptions(updatedBillOptions);
     setSelectedBillIndex(0);
     setAmount(0);
+
+    inputRef.current?.focus();
   };
 
   const handleRemoveBill = (index: number) => {
@@ -105,6 +109,7 @@ const BillsCalculator: React.FC = () => {
             <div className="flex items-center gap-2">
               <span>Number of Bills: </span>
               <input
+                ref={inputRef}
                 type="number"
                 value={isNaN(amount) ? "" : amount}
                 onFocus={handleFocus}
