@@ -42,91 +42,155 @@ const coins: Coin[] = [
 ];
 
 const CoinCalculator: React.FC = () => {
-  const [weights, setWeights] = useState<number[]>(Array(coins.length).fill(0));
-  const [amounts, setAmounts] = useState<number[]>(Array(coins.length).fill(0));
+  const [selectedCoinIndex, setSelectedCoinIndex] = useState<number>(0);
+  const [weight, setWeight] = useState<number>(0);
+  const [amount, setAmount] = useState<number>(0);
+  const [coinList, setCoinList] = useState<
+    { coin: Coin; weight: number; amount: number; total: number }[]
+  >([]);
+  const [coinOptions, setCoinOptions] = useState<Coin[]>(coins);
 
-  const handleWeightChange = (index: number, value: string) => {
-    const newWeights = [...weights];
-    newWeights[index] = parseFloat(value) || 0;
-    setWeights(newWeights);
-
-    const newAmounts = [...amounts];
-    newAmounts[index] = Math.floor(newWeights[index] / coins[index].weight);
-    setAmounts(newAmounts);
+  const handleWeightChange = (value: string) => {
+    const newWeight = parseFloat(value) || 0;
+    setWeight(newWeight);
+    setAmount(Math.floor(newWeight / coinOptions[selectedCoinIndex].weight));
   };
 
-  const handleAmountChange = (index: number, value: string) => {
-    const newAmounts = [...amounts];
-    newAmounts[index] = parseInt(value, 10) || 0;
-    setAmounts(newAmounts);
-
-    const newWeights = [...weights];
-    newWeights[index] = newAmounts[index] * coins[index].weight;
-    setWeights(newWeights);
+  const handleAmountChange = (value: string) => {
+    const newAmount = parseInt(value, 10) || 0;
+    setAmount(newAmount);
+    setWeight(newAmount * coinOptions[selectedCoinIndex].weight);
   };
 
-  const calculateTotal = (amount: number, coinValue: number) => {
-    return amount * coinValue;
+  const handleAddCoin = () => {
+    const selectedCoin = coinOptions[selectedCoinIndex];
+    const total = amount * selectedCoin.value;
+
+    setCoinList([...coinList, { coin: selectedCoin, weight, amount, total }]);
+
+    // Update coin options and reset inputs
+    const updatedCoinOptions = coinOptions.filter(
+      (item, ind) => ind !== selectedCoinIndex
+    );
+    setCoinOptions(updatedCoinOptions);
+    setSelectedCoinIndex(0);
+    setWeight(0);
+    setAmount(0);
   };
 
-  const totalValue = amounts.reduce(
-    (total, amount, index) =>
-      total + calculateTotal(amount, coins[index].value),
-    0
-  );
+  const handleRemoveCoin = (index: number) => {
+    const removedCoin = coinList[index].coin;
+
+    // Update the coin list by removing the selected coin
+    const updatedCoinList = coinList.filter((_, ind) => ind !== index);
+    setCoinList(updatedCoinList);
+
+    // Add the removed coin back to the options list
+    const updatedCoinOptions = [...coinOptions, removedCoin].sort(
+      (c1, c2) => c1.value - c2.value
+    );
+    setCoinOptions(updatedCoinOptions);
+
+    // Reset the selected coin index
+    setSelectedCoinIndex(0);
+  };
+
+  const totalValue = coinList.reduce((total, item) => total + item.total, 0);
 
   return (
     <div className="container mx-auto p-4 text-white">
       <h2 className="text-xl font-bold mb-4 text-center">Coin Calculator</h2>
-      <div className="flex flex-col gap-4">
-        {/* <div className="grid grid-cols-1 md:grid-cols-4 gap-4"> */}
-        {/* <div className="hidden md:block font-semibold">Coin Type</div>
-        <div className="hidden md:block font-semibold">Weight (grams)</div>
-        <div className="hidden md:block font-semibold">Amount of Coins</div>
-        <div className="hidden md:block font-semibold">Total Value (₪)</div> */}
-        {coins.map((coin, index) => {
-          const total = calculateTotal(amounts[index], coin.value);
-          return (
-            <div className="flex flex-col items-center" key={coin.name}>
-              <React.Fragment>
-                <div className="flex items-center">
+      <div className="flex flex-col items-center gap-4">
+        <div className="flex items-center justify-between w-full gap-2">
+          {coinOptions.length > 0 && (
+            <>
+              <img
+                src={coinOptions[selectedCoinIndex].image}
+                alt={coinOptions[selectedCoinIndex].name}
+                className="w-12 h-12 mr-2"
+              />
+              <select
+                className="inp"
+                value={selectedCoinIndex}
+                onChange={(e) =>
+                  setSelectedCoinIndex(parseInt(e.target.value, 10))
+                }
+              >
+                {coinOptions.map((coin, index) => (
+                  <option key={coin.name} value={index}>
+                    {coin.name}
+                  </option>
+                ))}
+              </select>
+            </>
+          )}
+        </div>
+
+        {coinOptions.length > 0 && (
+          <>
+            <div className="flex items-center gap-2">
+              <span>Weight (g): </span>
+              <input
+                type="number"
+                value={weight}
+                onChange={(e) => handleWeightChange(e.target.value)}
+                className="inp mt-2"
+                placeholder="0"
+              />
+            </div>
+
+            <div className="flex items-center gap-2">
+              <span>Number of Coins: </span>
+              <input
+                type="number"
+                value={amount}
+                onChange={(e) => handleAmountChange(e.target.value)}
+                className="inp mt-2"
+                placeholder="0"
+              />
+            </div>
+
+            <button className="btn mt-4" onClick={handleAddCoin}>
+              Add Coin to List
+            </button>
+          </>
+        )}
+
+        <div className="w-full mt-6">
+          {coinList.map((item, index) => (
+            <div
+              key={index}
+              className="flex justify-between items-center mb-2 p-2 border-b border-gray-500"
+            >
+              <div className="flex flex-col w-full pb-2">
+                <div className="flex gap-2 items-center justify-between">
                   <img
-                    src={coin.image}
-                    alt={coin.name}
+                    src={item.coin.image}
+                    alt={item.coin.name}
                     className="w-12 h-12 mr-2"
                   />
-                  <div>{coin.name}</div>
+                  <div>{item.coin.name}</div>
+                  <div>
+                    <button
+                      onClick={() => handleRemoveCoin(index)}
+                      className="btn bg-red-400 ml-3"
+                    >
+                      Remove
+                    </button>
+                  </div>
                 </div>
-                <div>
-                  <span>weight (g)</span>
-                  <input
-                    type="number"
-                    value={weights[index]}
-                    onChange={(e) => handleWeightChange(index, e.target.value)}
-                    className="inp mt-2"
-                    placeholder="0"
-                  />
+                <div className="flex items-center justify-between mt-2">
+                  <div>{item.weight} g</div>
+                  <div>{item.amount} coins</div>
+                  <div>{item.total.toFixed(2)} ₪</div>
                 </div>
-                <div>
-                  <span>coins num (g)</span>
-                  <input
-                    type="number"
-                    value={amounts[index]}
-                    onChange={(e) => handleAmountChange(index, e.target.value)}
-                    className="inp mt-2"
-                  />
-                </div>
-
-                <div className="md:mt-0">{total.toFixed(2)} ₪</div>
-              </React.Fragment>
+              </div>
             </div>
-          );
-        })}
-        <div className="col-span-3 md:col-span-3 font-semibold text-xl text-white">
-          Total Value of All Coins:
+          ))}
         </div>
+
         <div className="font-semibold text-xl text-white">
-          {totalValue.toFixed(2)} ₪
+          Total Value of All Coins: {totalValue.toFixed(2)} ₪
         </div>
       </div>
     </div>
