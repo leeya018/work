@@ -95,6 +95,24 @@ const CoinCalculator: React.FC = () => {
     setSelectedCoinIndex(0);
   };
 
+  const handleFocus = (
+    setter: React.Dispatch<React.SetStateAction<number>>,
+    value: number
+  ) => {
+    if (value === 0) {
+      setter(NaN); // Set the value to NaN (not a number) to clear the input
+    }
+  };
+
+  const handleBlur = (
+    setter: React.Dispatch<React.SetStateAction<number>>,
+    value: number
+  ) => {
+    if (isNaN(value)) {
+      setter(0); // Reset to 0 if the input is empty or NaN
+    }
+  };
+
   const totalValue = coinList.reduce((total, item) => total + item.total, 0);
 
   return (
@@ -112,9 +130,11 @@ const CoinCalculator: React.FC = () => {
               <select
                 className="inp"
                 value={selectedCoinIndex}
-                onChange={(e) =>
-                  setSelectedCoinIndex(parseInt(e.target.value, 10))
-                }
+                onChange={(e) => {
+                  setSelectedCoinIndex(parseInt(e.target.value, 10));
+                  setAmount(0);
+                  setWeight(0);
+                }}
               >
                 {coinOptions.map((coin, index) => (
                   <option key={coin.name} value={index}>
@@ -132,8 +152,12 @@ const CoinCalculator: React.FC = () => {
               <span>Weight (g): </span>
               <input
                 type="number"
-                value={weight}
-                onChange={(e) => handleWeightChange(e.target.value)}
+                value={isNaN(weight) ? "" : weight}
+                onFocus={() => handleFocus(setWeight, weight)}
+                onBlur={() => handleBlur(setWeight, weight)}
+                onChange={(e) => {
+                  handleWeightChange(e.target.value);
+                }}
                 className="inp mt-2"
                 placeholder="0"
               />
@@ -143,14 +167,20 @@ const CoinCalculator: React.FC = () => {
               <span>Number of Coins: </span>
               <input
                 type="number"
-                value={amount}
+                value={isNaN(amount) ? "" : amount}
+                onFocus={() => handleFocus(setAmount, amount)}
+                onBlur={() => handleBlur(setAmount, amount)}
                 onChange={(e) => handleAmountChange(e.target.value)}
                 className="inp mt-2"
                 placeholder="0"
               />
             </div>
 
-            <button className="btn mt-4" onClick={handleAddCoin}>
+            <button
+              className={` mt-4 bg-gray-500 ${amount == 0 ? "dis-btn" : "btn"}`}
+              disabled={amount === 0}
+              onClick={handleAddCoin}
+            >
               Add Coin to List
             </button>
           </>
