@@ -7,7 +7,7 @@ import React, { useEffect, useRef, useState } from "react";
 export default function Vegs() {
   const [vegCodes, setVegCodes] = useState(VEG_CODES);
 
-  const inputRefs = useRef([]); // Array of refs for each input
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   useEffect(() => {
     const storageVegs = localStorage.getItem("vegCodes");
@@ -90,7 +90,9 @@ export default function Vegs() {
               <input
                 type="number"
                 max={2}
-                ref={(el) => (inputRefs.current[index] = el)} // Attach the ref to the input
+                ref={(el: HTMLInputElement | null) => {
+                  inputRefs.current[index] = el;
+                }} // Correctly typed ref callback without return value
                 className="inp"
                 value={vegCode.inputValue || ""}
                 disabled={vegCode.inputValue === vegCode.code}
