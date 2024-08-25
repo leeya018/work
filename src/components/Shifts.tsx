@@ -21,6 +21,8 @@ function Shifts() {
 
   const calculate = () => {
     const rate = 35;
+    const driveRate = 11;
+    const totalForDrive = driveRate * shiftStore.shifts.length;
     const totalHoursT = shiftStore.shifts.reduce((acc, shift) => {
       if (!shift?.finishedAt) return 0;
       const duration = timeDifferenceDuration(
@@ -30,7 +32,7 @@ function Shifts() {
       return acc + duration.asHours();
     }, 0);
     // console.log({ totalHours });
-    const wageT = rate * totalHoursT;
+    const wageT = rate * totalHoursT + totalForDrive;
     console.log({ totalHoursT, wageT });
     setTotalWage(wageT);
     setTotalHours(totalHoursT);
