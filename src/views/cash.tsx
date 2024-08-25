@@ -14,10 +14,16 @@ import PaperCalculator from "@/components/PaperCalculator";
 
 function CashView() {
   const [chosen, setChosen] = useState<string>("shifts");
+  const [totalCoinSum, setTotalCoinSum] = useState<number>(0);
+  const [totalBillsSum, setTotalBillsSum] = useState<number>(0);
+  const [totalPaperSum, setTotalPaperSum] = useState<number>(0);
   const router = useRouter();
 
   shiftStore.setTitle(TITLES.cash);
 
+  console.log({ totalCoinSum, totalBillsSum, totalPaperSum });
+
+  const total = totalCoinSum + totalBillsSum + totalPaperSum;
   return (
     <div>
       <div className="container min-h-screen p-10 bg-black">
@@ -58,9 +64,15 @@ function CashView() {
         </div>
         {chosen === "cash_count" && (
           <div>
-            <CoinCalculator />
-            <BillsCalculator />
-            <PaperCalculator />
+            <CoinCalculator setTotal={setTotalCoinSum} />
+            <BillsCalculator setTotal={setTotalBillsSum} />
+            <PaperCalculator setTotal={setTotalPaperSum} />
+            <br />
+            <div className="border-t-2 text-white text-xl font-semibold">
+              total all: {total} ₪
+            </div>
+            <br />
+            <br />
           </div>
         )}
 

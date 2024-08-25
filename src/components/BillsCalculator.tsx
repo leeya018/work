@@ -13,7 +13,10 @@ const bills: Bill[] = [
   { name: "200 Shekels", value: 200, image: "/images/cash/200shekels.png" },
 ];
 
-const BillsCalculator: React.FC = () => {
+type BillCalculatorProps = {
+  setTotal: any;
+};
+const BillsCalculator = ({ setTotal }: BillCalculatorProps) => {
   const [selectedBillIndex, setSelectedBillIndex] = useState<number>(0);
   const [amount, setAmount] = useState<number>(0);
   const [billList, setBillList] = useState<
@@ -73,6 +76,7 @@ const BillsCalculator: React.FC = () => {
   };
 
   const totalSum = billList.reduce((total, item) => total + item.total, 0);
+  setTotal(totalSum);
 
   return (
     <div className="container mx-auto p-4 text-white">

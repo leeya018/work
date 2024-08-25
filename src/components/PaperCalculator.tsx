@@ -1,6 +1,10 @@
 import React, { useRef, useState } from "react";
 
-const PaperCalculator: React.FC = () => {
+type PaperCalculatorProps = {
+  setTotal: any;
+};
+
+const PaperCalculator = ({ setTotal }: PaperCalculatorProps) => {
   const [sumList, setSumList] = useState<number[]>([]);
   const [newSum, setNewSum] = useState<number>(0);
 
@@ -13,13 +17,13 @@ const PaperCalculator: React.FC = () => {
     inputRef.current?.focus();
   };
 
-  const getTotal = () => {
-    return sumList.reduce((acc, item) => acc + item, 0);
-  };
-
   const reverseList = () => {
     return [...sumList].reverse();
   };
+
+  const total = sumList.reduce((acc, item) => acc + item, 0);
+  setTotal(total);
+
   return (
     <div className="container mx-auto p-4 text-white">
       <h1>paper calculator</h1>
@@ -51,7 +55,7 @@ const PaperCalculator: React.FC = () => {
       </div>
       <br />
 
-      <div className="border-t-2 border-white">total: {getTotal()} ₪</div>
+      <div className="border-t-2 border-white">total: {total} ₪</div>
     </div>
   );
 };

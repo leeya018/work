@@ -41,7 +41,10 @@ const coins: Coin[] = [
   },
 ];
 
-const CoinCalculator: React.FC = () => {
+type CoinCalculatorProps = {
+  setTotal: any;
+};
+const CoinCalculator = ({ setTotal }: CoinCalculatorProps) => {
   const [selectedCoinIndex, setSelectedCoinIndex] = useState<number>(0);
   const [weight, setWeight] = useState<number>(0);
   const [amount, setAmount] = useState<number>(0);
@@ -118,7 +121,7 @@ const CoinCalculator: React.FC = () => {
   };
 
   const totalValue = coinList.reduce((total, item) => total + item.total, 0);
-
+  setTotal(totalValue);
   return (
     <div className="container mx-auto p-4 text-white">
       <h2 className="text-xl font-bold mb-4 text-center">Coin Calculator</h2>
