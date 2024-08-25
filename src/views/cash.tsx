@@ -10,6 +10,7 @@ import React, { useEffect, useState } from "react";
 import { shiftStore } from "@/stores/shiftStore";
 import { observer } from "mobx-react-lite";
 import { TITLES } from "@/util";
+import PaperCalculator from "@/components/PaperCalculator";
 
 function CashView() {
   const [chosen, setChosen] = useState<string>("shifts");
@@ -59,6 +60,7 @@ function CashView() {
           <div>
             <CoinCalculator />
             <BillsCalculator />
+            <PaperCalculator />
           </div>
         )}
 

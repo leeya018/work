@@ -20,7 +20,7 @@ const coins: Coin[] = [
     value: 0.5,
     image: "/images/cash/50agorot.png",
   },
-  { name: "1 Shekel", weight: 8, value: 1, image: "/images/cash/1shekel.png" },
+  { name: "1 Shekel", weight: 4, value: 1, image: "/images/cash/1shekel.png" },
   {
     name: "2 Shekels",
     weight: 5.7,
