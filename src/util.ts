@@ -74,39 +74,6 @@ export const MONTHS = [
 
 export const YEARS = [{ value: 2024, label: "2024" }];
 
-export const VEG_CODES: Veg[] = [
-  { title: "רוקט", code: "136", correctNum: 0, inputValue: "" },
-  { title: "שומר", code: "73", correctNum: 0, inputValue: "" },
-  { title: "שום", code: "60", correctNum: 0, inputValue: "" },
-  { title: "תפוח עץ", code: "92", correctNum: 0, inputValue: "" },
-  { title: "תפוח פינק", code: "96", correctNum: 0, inputValue: "" },
-  { title: "אבוקדו", code: "61", correctNum: 0, inputValue: "" },
-  { title: "אגס", code: "84", correctNum: 0, inputValue: "" },
-  { title: "אפרסק- אפרשזיף", code: "85", correctNum: 0, inputValue: "" },
-  { title: "בצל סגול", code: "57", correctNum: 0, inputValue: "" },
-  { title: "בצל לבן", code: "56", correctNum: 0, inputValue: "" },
-  { title: "מלון", code: "81", correctNum: 0, inputValue: "" },
-  { title: "בטטה", code: "59", correctNum: 0, inputValue: "" },
-  { title: "גזר", code: "42", correctNum: 0, inputValue: "" },
-  { title: "ברוקולי", code: "135", correctNum: 0, inputValue: "" },
-  { title: "דלעת", code: "76", correctNum: 0, inputValue: "" },
-  { title: "חציל", code: "49", correctNum: 0, inputValue: "" },
-  { title: "תפוח אדמה לבן", code: "58", correctNum: 0, inputValue: "" },
-  { title: "תפוח אדמה אדום", code: "79", correctNum: 0, inputValue: "" },
-  { title: "כרוב לבן", code: "43", correctNum: 0, inputValue: "" },
-  { title: "כרוב סגול", code: "44", correctNum: 0, inputValue: "" },
-  { title: "כרובית", code: "47", correctNum: 0, inputValue: "" },
-  { title: "מלפפון", code: "41", correctNum: 0, inputValue: "" },
-  { title: "בננה", code: "100", correctNum: 0, inputValue: "" },
-  { title: "ענבים ירוקים", code: "90", correctNum: 0, inputValue: "" },
-  { title: "ענבים שחורים", code: "91", correctNum: 0, inputValue: "" },
-  { title: "פומלה", code: "108", correctNum: 0, inputValue: "" },
-  { title: "גמבה", code: "52", correctNum: 0, inputValue: "" },
-  { title: "פלפל חריף", code: "78", correctNum: 0, inputValue: "" },
-  { title: "קישוא", code: "50", correctNum: 0, inputValue: "" },
-  { title: "אבטיח", code: "80", correctNum: 0, inputValue: "" },
-];
-
 export const getDbUrl = () => {
   if (process.env.NODE_ENV) {
     return "https://console.firebase.google.com/u/0/project/apartments-invest/firestore";
@@ -133,8 +100,8 @@ export const calculateShifts = (shifts: Shift[]) => {
 
   let totalWage = 0;
   let totalRegularHours = 0;
-  let totalOvertime1Hours = 0;
-  let totalOvertime2Hours = 0;
+  let totalOvertime1Hours = 0; // 125% hours
+  let totalOvertime2Hours = 0; // 150% hours
 
   shifts.forEach((shift) => {
     if (!shift?.finishedAt) return;
@@ -152,14 +119,14 @@ export const calculateShifts = (shifts: Shift[]) => {
 
     // --- Friday Shifts ---
     if (dayOfWeek === 5) {
-      regularHours = durationInHours;
-      shiftWage = regularHours * rate * 1.25;
+      overtime1Hours = durationInHours; // All Friday hours are paid at 125%
+      shiftWage = overtime1Hours * rate * 1.25;
     }
 
     // --- Saturday Shifts ---
     else if (dayOfWeek === 6) {
-      regularHours = durationInHours;
-      shiftWage = regularHours * rate * 1.5;
+      overtime2Hours = durationInHours; // All Saturday hours are paid at 150%
+      shiftWage = overtime2Hours * rate * 1.5;
     }
 
     // --- Regular Weekday Shifts (Sunday to Thursday) ---
@@ -187,8 +154,8 @@ export const calculateShifts = (shifts: Shift[]) => {
   console.log("Wage calculation complete.");
   console.log({
     totalRegularHours,
-    totalOvertime1Hours,
-    totalOvertime2Hours,
+    totalOvertime1Hours, // includes Friday hours (125%)
+    totalOvertime2Hours, // includes Saturday hours (150%)
     totalWage,
   });
 

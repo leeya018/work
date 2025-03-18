@@ -71,7 +71,7 @@ const AddShift = () => {
             ${
               shiftStore.title === ""
                 ? "bg-gray-700 text-gray-400 cursor-not-allowed"
-                : "bg-yellow text-black hover:bg-yellow-600"
+                : "bg-white text-black hover:bg-yellow-600"
             }`}
         >
           {currentShift ? "End Shift" : "Start Shift"}
