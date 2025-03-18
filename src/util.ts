@@ -119,3 +119,9 @@ export const githubUrl = "https://github.com/leeya018/work";
 const today = new Date();
 export const curr_m = today.getMonth() + 1;
 export const curr_y = today.getFullYear();
+
+export const getUrl = () => {
+  return process.env.NODE_ENV === "development"
+    ? process.env.NEXT_PUBLIC_BASIC_URL
+    : process.env.NEXT_PUBLIC_BASIC_URL_PRODUCTION;
+};
