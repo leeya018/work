@@ -28,9 +28,10 @@ function HomeView() {
 
   const calculate = async () => {
     try {
+      if (!userStore.user?.uid) throw new Error("no user id");
       console.log("start");
       const shifts: Shift[] = await getShiftsApi(
-        userStore.user.uid,
+        userStore.user?.uid,
         "",
         curr_y,
         curr_m

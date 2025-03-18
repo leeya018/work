@@ -21,7 +21,7 @@ const ShiftsInfo = () => {
     <ProtectedRoute>
       <SettingsInfo />
       <div className="">
-        <div className="flex items-center justify-center gap-10 mt-5 text-md font-semibold text-white">
+        <div className="flex items-center justify-center gap-10 mt-5 mx-10 text-md font-semibold text-white">
           <button
             className={`${
               chosen === "add_shift" && "bg-yellow p-5 rounded-xl text-black"

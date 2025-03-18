@@ -46,7 +46,10 @@ const ProtectedRoute: FC<ProtectedRouteProps> = observer(({ children }) => {
     );
   }
   return isAuthenticated ? (
-    <div className="container bg-black w-screen h-screen">
+    <div
+      className="container bg-black min-h-screen 
+     "
+    >
       <Header />
       {children}
     </div>
