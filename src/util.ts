@@ -1,5 +1,6 @@
 import { Timestamp } from "firebase/firestore";
 import { Veg } from "./interfaces/Veg";
+import { Shift } from "./interfaces/Shift";
 
 const moment = require("moment");
 
@@ -124,4 +125,77 @@ export const getUrl = () => {
   return process.env.NODE_ENV === "development"
     ? process.env.NEXT_PUBLIC_BASIC_URL
     : process.env.NEXT_PUBLIC_BASIC_URL_PRODUCTION;
+};
+
+export const calculateShifts = (shifts: Shift[]) => {
+  const rate = 35; // Regular hourly wage
+  const busPay = 11; // Per-day transportation payment
+
+  let totalWage = 0;
+  let totalRegularHours = 0;
+  let totalOvertime1Hours = 0;
+  let totalOvertime2Hours = 0;
+
+  shifts.forEach((shift) => {
+    if (!shift?.finishedAt) return;
+
+    const start = shift.startedAt.toDate();
+    const end = shift.finishedAt.toDate();
+
+    const durationInHours = timeDifferenceDuration(start, end).asHours();
+    const dayOfWeek = start.getDay(); // 0=Sunday, 5=Friday, 6=Saturday
+
+    let regularHours = 0;
+    let overtime1Hours = 0;
+    let overtime2Hours = 0;
+    let shiftWage = 0;
+
+    // --- Friday Shifts ---
+    if (dayOfWeek === 5) {
+      regularHours = durationInHours;
+      shiftWage = regularHours * rate * 1.25;
+    }
+
+    // --- Saturday Shifts ---
+    else if (dayOfWeek === 6) {
+      regularHours = durationInHours;
+      shiftWage = regularHours * rate * 1.5;
+    }
+
+    // --- Regular Weekday Shifts (Sunday to Thursday) ---
+    else {
+      regularHours = Math.min(durationInHours, 8);
+      overtime1Hours = Math.min(Math.max(durationInHours - 8, 0), 2);
+      overtime2Hours = Math.max(durationInHours - 10, 0);
+
+      shiftWage =
+        regularHours * rate +
+        overtime1Hours * rate * 1.25 +
+        overtime2Hours * rate * 1.5;
+    }
+
+    // Add daily transportation pay (bus)
+    shiftWage += busPay;
+
+    // Accumulate total values
+    totalRegularHours += regularHours;
+    totalOvertime1Hours += overtime1Hours;
+    totalOvertime2Hours += overtime2Hours;
+    totalWage += shiftWage;
+  });
+
+  console.log("Wage calculation complete.");
+  console.log({
+    totalRegularHours,
+    totalOvertime1Hours,
+    totalOvertime2Hours,
+    totalWage,
+  });
+
+  return {
+    totalRegularHours,
+    totalOvertime1Hours,
+    totalOvertime2Hours,
+    totalWage,
+  };
 };
