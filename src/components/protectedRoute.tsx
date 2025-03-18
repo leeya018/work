@@ -5,6 +5,8 @@ import { onAuthStateChanged } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import { observer } from "mobx-react-lite";
 import userStore from "@/stores/userStore";
+import Header from "./Header";
+import { getUserApi } from "@/firestore/user/userDB";
 
 type ProtectedRouteProps = {
   children: React.ReactNode;
@@ -20,7 +22,10 @@ const ProtectedRoute: FC<ProtectedRouteProps> = observer(({ children }) => {
       console.log(user);
       if (user) {
         setIsAuthenticated(true);
-        userStore.updateUser(user);
+
+        getUserApi(user.uid).then((user) => {
+          userStore.updateUser(user);
+        });
       } else {
         userStore.setUser(null);
         router.push("/login");
@@ -40,6 +45,11 @@ const ProtectedRoute: FC<ProtectedRouteProps> = observer(({ children }) => {
       </div>
     );
   }
-  return isAuthenticated ? <div>{children}</div> : null;
+  return isAuthenticated ? (
+    <div className="container bg-black w-screen h-screen">
+      <Header />
+      {children}
+    </div>
+  ) : null;
 });
 export default ProtectedRoute;

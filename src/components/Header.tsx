@@ -1,3 +1,5 @@
+"use client";
+
 import userStore from "@/stores/userStore";
 import { observer } from "mobx-react-lite";
 import Image from "next/image";
@@ -6,10 +8,7 @@ import { useRouter } from "next/navigation";
 import { IoArrowBackOutline } from "react-icons/io5";
 import { getAuth, signOut } from "firebase/auth";
 
-type HeaderPorps = {
-  handleChosenComp: any;
-};
-const Header = ({ handleChosenComp }: HeaderPorps) => {
+const Header = () => {
   const router = useRouter();
   const auth = getAuth();
 
@@ -28,7 +27,7 @@ const Header = ({ handleChosenComp }: HeaderPorps) => {
     <div className="absolute left-0 right-0 w-screen top-0 h-20 flex items-center justify-between px-4">
       <button
         className="btn font-bold h-12 w-12 flex justify-center items-center"
-        onClick={() => handleChosenComp("home")}
+        onClick={() => router.push("/")}
       >
         <IoArrowBackOutline size={40} />
       </button>

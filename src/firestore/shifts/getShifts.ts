@@ -9,7 +9,7 @@ import {
   Timestamp,
   where,
 } from "firebase/firestore";
-import { findUserApi } from "../user/findUser";
+import { findUserApi } from "../user/userDB";
 
 export const getShiftsApi = async (
   userId: string,

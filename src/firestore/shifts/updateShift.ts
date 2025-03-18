@@ -1,7 +1,8 @@
 import { db } from "@/firebase";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
-import { findUserApi } from "../user/findUser";
+
 import { Shift } from "@/interfaces/Shift";
+import { findUserApi } from "../user/userDB";
 
 export const updateShiftsApi = async (
   userId: string,

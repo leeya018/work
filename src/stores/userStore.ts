@@ -1,8 +1,9 @@
-import { getUserApi } from "@/firestore/user/getUser";
+import { getUserApi } from "@/firestore/user/userDB";
+import { User } from "@/interfaces/User";
 import { autorun, makeAutoObservable, toJS } from "mobx";
 
 class UserS {
-  user: any | null = null;
+  user: User | null = null;
 
   constructor() {
     makeAutoObservable(this);

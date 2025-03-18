@@ -12,8 +12,10 @@ import Image from "next/image";
 import { observer } from "mobx-react-lite";
 import { useRouter } from "next/navigation";
 import userStore from "@/stores/userStore";
-import { getUserApi } from "@/firestore/user/getUser";
+import { addUserApi, getUserApi } from "@/firestore/user/userDB";
 import { auth } from "@/firebase";
+import Alert from "@/components/Alert";
+import { messageStore } from "@/stores/messageStore";
 
 const LoginPage: React.FC = () => {
   const router = useRouter();
@@ -25,14 +27,19 @@ const LoginPage: React.FC = () => {
       const provider = new GoogleAuthProvider();
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
-      const userData = await getUserApi(user);
-      userStore.updateUser(userData);
-
+      const userData = await getUserApi(user.uid);
+      if (!userData) {
+        if (!user) throw new Error("user is not extist");
+        await addUserApi(user);
+        router.push("/settings");
+      } else {
+        router.push("/");
+      }
       console.log({ userData });
-      router.push("/");
+      // userStore.updateUser(userData);
     } catch (error) {
       console.error("Error logging in with Google: ", error);
-      throw error;
+      messageStore.setMessage({ type: "error", text: error.message });
     }
   };
 
@@ -64,6 +71,7 @@ const LoginPage: React.FC = () => {
           </button>
         </div>
       </div>
+      <Alert />
     </div>
   );
 };
