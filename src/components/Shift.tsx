@@ -32,6 +32,8 @@ export default function ShiftCard({ shift }: ShiftPorps) {
   const updateShift = async () => {
     try {
       if (!shift.id) throw new Error("there is no id to shift");
+      if (!userStore.user?.uid)
+        throw new Error("user id from auth is not defined");
       const updatedShift = await updateShiftsApi(userStore.user.uid, shift.id, {
         startedAt: Timestamp.fromDate(startDate),
         finishedAt: Timestamp.fromDate(endDate),

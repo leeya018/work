@@ -2,9 +2,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import ProtectedRoute from "@/components/protectedRoute";
-import Image from "next/image";
 import userStore from "@/stores/userStore";
-import Header from "@/components/Header";
 import { useRouter } from "next/navigation";
 import {
   calculateShifts,
@@ -13,7 +11,6 @@ import {
   getDbUrl,
   githubUrl,
   netlifyUrl,
-  timeDifferenceDuration,
 } from "@/util";
 import { shiftStore } from "@/stores/shiftStore";
 import { getShiftsApi } from "@/firestore/shifts/getShifts";
@@ -67,6 +64,7 @@ function HomeView() {
       // setTotalHours(
       //   totalRegularHours + totalOvertime1Hours + totalOvertime2Hours
       // );
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       console.error(error.message);
       messageStore.setMessage({ type: "error", text: error.message });

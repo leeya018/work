@@ -1,26 +1,18 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 
-import {
-  signInWithPopup,
-  GoogleAuthProvider,
-  onAuthStateChanged,
-} from "firebase/auth";
+import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
 import Image from "next/image";
 
 import { observer } from "mobx-react-lite";
 import { useRouter } from "next/navigation";
-import userStore from "@/stores/userStore";
 import { addUserApi, getUserApi } from "@/firestore/user/userDB";
 import { auth } from "@/firebase";
 import Alert from "@/components/Alert";
-import { messageStore } from "@/stores/messageStore";
 
 const LoginPage: React.FC = () => {
   const router = useRouter();
-  const inputRef = useRef(null);
-  const [isLoading, setIsLoading] = useState(false);
 
   const googleSignIn = async () => {
     try {
@@ -36,10 +28,10 @@ const LoginPage: React.FC = () => {
         router.push("/");
       }
       console.log({ userData });
-      // userStore.updateUser(userData);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error) {
       console.error("Error logging in with Google: ", error);
-      messageStore.setMessage({ type: "error", text: error.message });
+      // messageStore.setMessage({ type: "error", text: error?.message });
     }
   };
 

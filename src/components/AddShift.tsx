@@ -23,6 +23,7 @@ const AddShift = () => {
   }, []);
 
   const startShift = async () => {
+    if (!userStore.user?.uid) throw new Error("user id not define");
     const shift: Shift = {
       userId: userStore.user.uid,
       title: shiftStore.title,
@@ -37,6 +38,7 @@ const AddShift = () => {
   const endShift = async () => {
     try {
       if (!currentShift) throw new Error("Shift is not set");
+      if (!userStore.user?.uid) throw new Error("user id not define");
 
       const shiftId = await addShiftApi(userStore.user.uid, {
         ...currentShift,

@@ -1,15 +1,11 @@
 "use client";
 
-import Header from "@/components/Header";
-import ProtectedRoute from "@/components/protectedRoute";
-import { useUser } from "@/hooks/useUser";
 import { shiftStore } from "@/stores/shiftStore";
 import userStore from "@/stores/userStore";
 import { TITLES } from "@/util";
-import { getAuth } from "firebase/auth";
 import { observer } from "mobx-react-lite";
 
-import React, { useEffect } from "react";
+import React from "react";
 
 function settingsInfo() {
   shiftStore.setTitle(TITLES.security);

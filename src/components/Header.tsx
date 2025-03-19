@@ -17,7 +17,8 @@ const Header = () => {
   const logoutUser = async () => {
     try {
       await signOut(auth);
-    } catch (error) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
       console.error("Error logging out: ", error);
       throw error;
     }

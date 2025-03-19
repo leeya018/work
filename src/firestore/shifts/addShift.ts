@@ -1,17 +1,7 @@
 import { db } from "@/firebase";
 import { Shift } from "@/interfaces/Shift";
-import {
-  DocumentReference,
-  addDoc,
-  collection,
-  doc,
-  getDocs,
-  query,
-  setDoc,
-  where,
-} from "firebase/firestore";
+import { DocumentReference, addDoc, collection } from "firebase/firestore";
 
-import { finished } from "stream";
 import { TITLES } from "@/util";
 import { findUserApi } from "../user/userDB";
 

@@ -1,4 +1,3 @@
-import { getUserApi } from "@/firestore/user/userDB";
 import { User } from "@/interfaces/User";
 import { autorun, makeAutoObservable, toJS } from "mobx";
 

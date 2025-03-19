@@ -5,14 +5,9 @@ import ProtectedRoute from "@/components/protectedRoute";
 import SettingsInfo from "@/components/settingsInfo";
 import Shifts from "@/components/Shifts";
 import ShiftsPerMonth from "@/components/ShiftsPerMonth";
-import { getShiftsApi } from "@/firestore/shifts/getShifts";
-import { Shift } from "@/interfaces/Shift";
-import { messageStore } from "@/stores/messageStore";
 import { shiftStore } from "@/stores/shiftStore";
-import userStore from "@/stores/userStore";
-import { getAuth, signOut } from "firebase/auth";
 import { observer } from "mobx-react-lite";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 const ShiftsInfo = () => {
   const [chosen, setChosen] = useState<string>("add_shift");

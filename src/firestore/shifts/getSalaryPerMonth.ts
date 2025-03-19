@@ -4,8 +4,6 @@ import { Shift } from "@/interfaces/Shift";
 import {
   collection,
   getDocs,
-  limit,
-  orderBy,
   query,
   Timestamp,
   where,

@@ -12,8 +12,7 @@ import {
 import { findUserApi } from "../user/userDB";
 
 export const getCurrentShiftApi = async (
-  userId: string,
-  title: string
+  userId: string
 ): Promise<Shift | null> => {
   if (!userId) throw new Error("id of user not defiend");
   await findUserApi(userId);

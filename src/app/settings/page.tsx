@@ -55,6 +55,7 @@ function SettingsPage() {
 
       // Exit edit mode
       setIsEditMode(false);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       messageStore.setMessage({ type: "error", text: error.message });
     } finally {

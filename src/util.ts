@@ -1,8 +1,7 @@
 import { Timestamp } from "firebase/firestore";
-import { Veg } from "./interfaces/Veg";
 import { Shift } from "./interfaces/Shift";
 
-const moment = require("moment");
+import moment from "moment";
 
 export const TITLES = {
   cash: "cash",
@@ -15,9 +14,9 @@ export const timeDifferenceDuration = (startDate: Date, endDate: Date) => {
 
   try {
     console.log(startDate);
-    let start = moment(startDate, TIME_FORMAT);
+    const start = moment(startDate, TIME_FORMAT);
 
-    let end = moment(endDate, TIME_FORMAT);
+    const end = moment(endDate, TIME_FORMAT);
 
     // Calculate the difference in milliseconds
     const duration = moment.duration(end.diff(start));
@@ -25,6 +24,7 @@ export const timeDifferenceDuration = (startDate: Date, endDate: Date) => {
     // Extract hours and minutes
 
     return duration;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     console.log("function - timeDifferenceDuration" + error.message);
     console.log({ startDate, endDate });
@@ -34,6 +34,7 @@ export const timeDifference = (startDate: Date, endDate: Date) => {
   console.log("timeDifference");
   // Parse the dates using moment
   const duration = timeDifferenceDuration(startDate, endDate);
+  if (!duration) throw new Error("duration is not defiend");
   console.log(duration.asHours());
   const hours = Math.floor(duration.asHours());
   const minutes = duration.minutes();
@@ -109,7 +110,9 @@ export const calculateShifts = (shifts: Shift[]) => {
     const start = shift.startedAt.toDate();
     const end = shift.finishedAt.toDate();
 
-    const durationInHours = timeDifferenceDuration(start, end).asHours();
+    const timeDiff = timeDifferenceDuration(start, end);
+    if (!timeDiff) throw new Error("time diff is not defiend");
+    const durationInHours = timeDiff.asHours();
     const dayOfWeek = start.getDay(); // 0=Sunday, 5=Friday, 6=Saturday
 
     let regularHours = 0;
