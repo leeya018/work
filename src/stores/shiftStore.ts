@@ -49,6 +49,9 @@ class ShiftStore {
       shift.id === updatedShift.id ? updatedShift : shift
     );
   }
+  deleteShift(shiftId: string) {
+    this.shifts = this.shifts.filter((shift) => shift.id !== shiftId);
+  }
   setChosen(shift: Shift) {
     this.chosen = shift;
   }
