@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import ShiftCard from "./Shift";
-import { Shift } from "@/interfaces/Shift";
 import { shiftStore } from "@/stores/shiftStore";
 import { calculateShifts } from "@/util";
 import WageCalculation from "./WageCalculation";
