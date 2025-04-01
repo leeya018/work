@@ -63,7 +63,10 @@ function Shifts() {
       {/* Shifts List */}
       {!shiftStore.isLoading && shiftStore.shifts.length > 0 && (
         <div className="w-full  mx-auto px-4 py-8">
-          <div className="h-[400px] md:h-[600px] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-gray-900">
+          <div
+            className="h-[60vh]  overflow-y-auto
+           scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-gray-900"
+          >
             <ul className="flex flex-col gap-4 pr-2">
               {shiftStore.shifts.map((shift, key) => (
                 <li key={key} className="w-full px-2 md:px-4">

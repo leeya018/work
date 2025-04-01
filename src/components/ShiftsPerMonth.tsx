@@ -7,7 +7,7 @@ import { observer } from "mobx-react-lite";
 
 function ShiftsPerMonth() {
   return (
-    <div className="w-full h-full max-w-5xl mx-auto px-4 py-10">
+    <div className="w-full h-full max-w-5xl mx-auto  pt-5">
       {/* Filters Section */}
       <div
         className="flex flex-row justify-center 

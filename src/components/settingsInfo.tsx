@@ -13,11 +13,8 @@ function settingsInfo() {
   console.log(userStore.user);
   return (
     <div>
-      <div className=" p-10 bg-black">
-        <h1 className="flex justify-center mt-14 text-3xl text-white">
-          security
-        </h1>
-        <div className="text-xl font-semibold text-white flex justify-center mt-4">
+      <div className=" pt-20 bg-black ">
+        <div className="text-xl font-semibold text-white flex justify-center mt-2">
           my code : {userStore.user?.employeeNumber}
         </div>
       </div>
