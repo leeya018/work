@@ -39,13 +39,16 @@ const ButtonGroup: React.FC<ButtonGroupProps> = ({
   }, [localChosen, setChosen]);
 
   return (
-    <div className="flex flex-wrap justify-center gap-2 mt-5 mx-2 text-sm font-semibold text-white">
+    <div
+      className="flex justify-center gap-2 mt-5 mx-2 text-sm
+     font-semibold text-white "
+    >
       {buttons.map((button) => (
         <button
           key={button.id}
           className={`${
             localChosen === button.id && "bg-yellow p-3 rounded-lg text-black"
-          } px-2 py-5 bg-gray-900 rounded-lg m-1`}
+          } px-2 py-5 bg-gray-900 rounded-lg m-1 w-[30%]`}
           onClick={() => {
             setLocalChosen(button.id);
             if (button.resetMonth) {

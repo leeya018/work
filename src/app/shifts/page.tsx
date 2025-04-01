@@ -15,19 +15,21 @@ const ShiftsInfo = () => {
 
   return (
     <ProtectedRoute>
-      <SettingsInfo />
-      <div className="overflow-y-auto">
-        {" "}
-        {/* Add overflow-y-auto here */}
-        <ButtonGroup
-          chosen={chosen}
-          setChosen={setChosen}
-          shiftStore={shiftStore}
-        />
-        {chosen === "add_shift" && <AddShift />}
-        {chosen === "last month shifts" && <Shifts />}
-        {chosen === "shifts_per_m" && <ShiftsPerMonth />}
-        <Alert />
+      <div className="w-screen">
+        <SettingsInfo />
+        <div className="overflow-y-auto">
+          {" "}
+          {/* Add overflow-y-auto here */}
+          <ButtonGroup
+            chosen={chosen}
+            setChosen={setChosen}
+            shiftStore={shiftStore}
+          />
+          {chosen === "add_shift" && <AddShift />}
+          {chosen === "last month shifts" && <Shifts />}
+          {chosen === "shifts_per_m" && <ShiftsPerMonth />}
+          <Alert />
+        </div>
       </div>
     </ProtectedRoute>
   );
