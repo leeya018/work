@@ -52,6 +52,8 @@ const AddShift = () => {
         text: "New shift added successfully!",
       });
 
+      shiftStore.getData(); // Assuming you have a method like this in shiftStore
+
       localStorage.removeItem("curr_shift");
       setCurrentShift(null);
     } catch (e: any) {

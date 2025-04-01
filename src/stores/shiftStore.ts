@@ -57,6 +57,7 @@ class ShiftStore {
   }
 
   getData() {
+    console.log("=====================FETCHING SHIFTS DATA===================");
     this.isLoading = true;
 
     if (userStore.user && this.title) {
